@@ -1,0 +1,165 @@
+@font-face {
+  src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
+  font-family: "Roboto", sans-serif;
+}
+/* Colors */
+$pink1: #e002a5;
+$pink2: #ffd5f4;
+$pink3: #88286e;
+$pink4: #f700b6;
+$border: #7c6f76;
+$border2: #433c40;
+$border3: #a1a1a1;
+$border4: #949092;
+$font-color: #272627;
+$blue-pp: #0072b5;
+$blue-wm: #34568b;
+$red-pm: #e9897e;
+$purple-sk: #d46187;
+$green-nt: #00a170;
+$green-line: #00b900;
+
+$demo: #e1a5d1;
+$demo2: #36122c;
+$demo3: #220a1b;
+$demo4: #ad80a1;
+$demo5: #8e0369;
+
+/* Globals */
+*,
+html,
+body,
+template {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 0.0178571429em;
+  word-spacing: normal;
+  word-wrap: break-word;
+  font-size-adjust: none;
+  line-height: 1.5;
+}
+
+*[dark],
+[dark],
+*[dark]:below-level,
+[dark]:below-level {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*[light],
+[light],
+*[light]:below-level,
+[light]:below-level {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.top {
+  position: fixed;
+  top: 0;
+}
+
+.bottom {
+  position: fixed;
+  bottom: 0;
+}
+
+.absolute-left {
+  position: fixed;
+  left: 0;
+  top: 70px;
+}
+
+.absolute-right {
+  position: fixed;
+  top: 70px;
+  right: 0;
+}
+
+.top-left {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.top-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.top-right-m2 {
+  position: fixed;
+  top: 3px;
+  right: 10px;
+}
+
+.bottom-right {
+  position: fixed;
+  bottom: 60px;
+  right: 5px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+@import "./style/textAndBorders.scss";
+@import "./style/backgroundsAndButtons.scss";
+
+a,
+.link,
+nuxt-link {
+  text-decoration: none;
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+    "Droid Sans Mono", monospace, monospace;
+}
+
+::placeholder,
+[label],
+[value],
+input,
+input[label],
+input::placeholder,
+v-text-field,
+v-text-field::placeholder,
+v-text-field::-ms-value,
+v-text-field[label],
+v-text-field[value],
+v-text-field[option],
+v-text-field::after,
+v-text-field:below-level,
+v-autocomplete,
+v-autocomplete[label],
+v-autocomplete::after,
+v-autocomplete::selection,
+v-autocomplete::placeholder,
+v-autocomplete:below-level,
+v-file-input,
+v-file-input[label],
+v-file-input[value],
+v-file-input::-ms-value,
+v-file-input::after,
+v-file-input::placeholder,
+v-file-input:below-level {
+  font-size: 0.7765456789rem;
+  align-items: center;
+  text-align: center;
+  text-justify: auto;
+}
+
+@media screen and (max-width: 900px) {
+  *,
+  .medium {
+    font-size: 85%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  *,
+  .medium {
+    font-size: 75%;
+  }
+}

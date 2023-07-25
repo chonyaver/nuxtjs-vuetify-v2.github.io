@@ -1,0 +1,39 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2015
+  },
+  "noInlineConfig": false,
+  "globals": {
+    "importScripts": true
+  },
+  "plugins": ["import", "json"],
+  "rules": {
+    "quote-props": "off",
+    "quotes": ["warn", "single"],
+    "semi": ["error", "always"],
+    "no-undef": "warn",
+    "no-console": "off",
+    "no-unused-vars": "warn",
+    "indent": "off",
+    "require-await": "off",
+    "no-return-assign": "off",
+    "arrow-parens": "off",
+    "object-shorthand": "off",
+    "no-mixed-spaces-and-tabs": "off",
+    "multiline-ternary": "off",
+    "object-curly-spacing": "off",
+    "comma-dangle": "error",
+    "camelcase": "off",
+    "no-unused-expressions": "off",
+    "no-sequences": "off",
+    "space-before-function-paren": "off",
+    "max-len": "off"
+  }
+}

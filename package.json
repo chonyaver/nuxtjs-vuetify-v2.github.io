@@ -1,0 +1,40 @@
+{
+  "name": "nuxtjs-vuetify",
+  "version": "1.0.0",
+  "description": "Nuxt starter for CodeSandBox",
+  "author": "Nuxt.js Team",
+  "private": true,
+  "scripts": {
+    "dev": "MINIMAL=1 CSB=1 nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "post-update": "yarn upgrade --latest"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "latest",
+    "@nuxtjs/dotenv": "latest",
+    "@nuxtjs/firebase": "^8.2.2",
+    "@nuxtjs/vuetify": "1.8.3",
+    "body-parser": "latest",
+    "cookie": "latest",
+    "cookie-parser": "latest",
+    "cookie-universal-nuxt": "latest",
+    "dayjs": "latest",
+    "dotenv": "latest",
+    "express": "latest",
+    "express-session": "latest",
+    "firebase": "latest",
+    "firebase-admin": "latest",
+    "jwt-decode": "^3.1.2s",
+    "nuxt": "2.9.2",
+    "reqlim": "0.0.0",
+    "util": "latest"
+  },
+  "devDependencies": {
+    "eslint": "latest",
+    "eslint-plugin-import": "latest",
+    "eslint-plugin-json": "latest"
+  },
+  "keywords": []
+}

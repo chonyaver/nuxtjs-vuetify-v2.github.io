@@ -1,0 +1,202 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
+
+.t-transparent {
+  color: transparent !important;
+}
+
+.t-text {
+  font-family: "Roboto", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.0178571429em;
+}
+
+.small {
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.0178571429em;
+}
+
+.h6 {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9987656789rem;
+  letter-spacing: 0.0178571429em;
+  font-weight: 500;
+}
+
+.large {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.8998756789rem;
+  letter-spacing: 0.0178571429em;
+  font-weight: 500;
+}
+
+.medium {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.0178571429em;
+  font-weight: 300;
+}
+
+.t-btn {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.0175em;
+  font-weight: 400;
+}
+
+.t-white {
+  color: #ffffff !important;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+.t-light {
+  color: #655d62 !important;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.t-pink1 {
+  color: #e002a5 !important;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.t-pink2 {
+  color: #ffd5f4 !important;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+.t-pink3 {
+  color: #88286e !important;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.t-blue-pp {
+  color: #0072b5 !important;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.t-line {
+  color: #00b900 !important;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.t-gtad1 {
+  fill: linearGradient1;
+}
+
+@keyframes linearGradient1 {
+  0% {
+    background: linear-gradient(180deg, #ffffff, #ffd5f4);
+    background-size: 100% 100%;
+  }
+}
+
+.t-shadow {
+  text-shadow: 0px 0px 3px #11111189;
+}
+
+.bd-0 {
+  border-bottom: none;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+
+.bd-all {
+  border-bottom: 1px solid #949092;
+  border-top: 1px solid #949092;
+  border-right: 1px solid #949092;
+  border-left: 1px solid #949092;
+}
+
+.bd-inline {
+  border-bottom: 1px solid #949092;
+  border-top: 1px solid #949092;
+  border-right: none;
+  border-left: none;
+}
+
+.bd-t {
+  border-left: none;
+  border-top: 1px solid #949092;
+  border-bottom: none;
+  border-right: none;
+}
+
+.bd-r {
+  border-bottom: none;
+  border-top: none;
+  border-right: 1px solid #949092;
+  border-left: none;
+}
+
+.bd-b {
+  border-bottom: 1px solid #949092;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+
+.bd-l {
+  border-top: none;
+  border-left: 1px solid #949092;
+  border-bottom: none;
+  border-right: none;
+}
+
+.bd-rb {
+  border-bottom: 1px solid #949092;
+  border-top: none;
+  border-right: 1px solid #949092;
+  border-left: none;
+}
+
+.bd-lb {
+  border-bottom: 1px solid #949092;
+  border-top: none;
+  border-left: 1px solid #949092;
+  border-right: none;
+}
+
+.bd-rt {
+  border-top: 1px solid #949092;
+  border-bottom: none;
+  border-right: 1px solid #949092;
+  border-left: none;
+}
+
+.bd-lt {
+  border-top: 1px solid #949092;
+  border-bottom: none;
+  border-left: 1px solid #949092;
+  border-right: none;
+}
+
+.bd-4 {
+  border-radius: 4px !important;
+}
+
+.bd-7 {
+  border-radius: 7px;
+}
+
+.bd-50 {
+  border-radius: 50%;
+}
+
+.bd-pink2 {
+  border-left: 1px groove #ffd5f4;
+  border-right: 1px groove #ffd5f4;
+  border-top: 1px groove #ffd5f4;
+  border-bottom: 1px groove #ffd5f4;
+}
+
+.shadow {
+  box-shadow: 0px 3px 10px #433c40;
+}
