@@ -1009,6 +1009,62 @@ template {
   box-shadow: 0px 3px 10px #433c40;
 }
 
+.bd-pp {
+  border-top: 1px double #0072b5 !important;
+  border-right: 1px double #0072b5 !important;
+  border-bottom: 1px double #0072b5 !important;
+  border-left: 1px double #0072b5 !important;
+}
+
+.bd-wm {
+  border-top: 1px double #34568b !important;
+  border-right: 1px double #34568b !important;
+  border-bottom: 1px double #34568b !important;
+  border-left: 1px double #34568b !important;
+}
+
+.bd-pm {
+  border-top: 1px double #ec3434 !important;
+  border-right: 1px double #ec3434 !important;
+  border-bottom: 1px double #ec3434 !important;
+  border-left: 1px double #ec3434 !important;
+}
+
+.bd-nt {
+  border-top: 1px double #017b01 !important;
+  border-right: 1px double #017b01 !important;
+  border-bottom: 1px double #017b01 !important;
+  border-left: 1px double #017b01 !important;
+}
+
+.bd-sk {
+  border-top: 1px double #d46187 !important;
+  border-right: 1px double #d46187 !important;
+  border-bottom: 1px double #d46187 !important;
+  border-left: 1px double #d46187 !important;
+}
+
+.bd-line {
+  border-top: 1px double #00b900 !important;
+  border-right: 1px double #00b900 !important;
+  border-bottom: 1px double #00b900 !important;
+  border-left: 1px double #00b900 !important;
+}
+
+.bd-tmn {
+  border-top: 1px double #ff7700 !important;
+  border-right: 1px double #ff7700 !important;
+  border-bottom: 1px double #ff7700 !important;
+  border-left: 1px double #ff7700 !important;
+}
+
+.bd-pink4 {
+  border-top: 1px double #f700b6 !important;
+  border-right: 1px double #f700b6 !important;
+  border-bottom: 1px double #f700b6 !important;
+  border-left: 1px double #f700b6 !important;
+}
+
 a,
 .link,
 nuxt-link {

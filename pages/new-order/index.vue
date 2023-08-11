@@ -115,58 +115,59 @@
             </v-card-text>
           </v-card>
           <v-spacer />
+          <div style="position: absolute; left: 2px; bottom: 2px;">
+            <v-img src="#" width="auto" height="100px"></v-img>
+          </div>
         </v-card-text>
-        <v-card-text v-if="flow2 === true">
+        <v-card-text
+          v-if="flow2 === true"
+          class="align-center py-0"
+          align="center"
+        >
           <v-spacer />
           <v-card
             light
             elevation="0"
-            class="mx-auto pa-2 bg-white"
+            class="transparent mt-0 pa-1 mx-auto"
             max-width="400px"
           >
-            <v-card-text class="align-center pa-1" align="center">
-              <v-container fluid>
+            <v-card-text class="transparent">
+              <v-container>
                 <v-row align="center" justify="center">
-                  <v-col
-                    v-for="sItem in sItems"
-                    :key="sItem.id"
-                    cols="6"
-                    align="center"
-                    class="align-center"
-                  >
+                  <v-col v-for="sItem in sItems" :key="sItem.id" cols="6">
                     <v-sheet
-                      color="transparent"
-                      class="d-block align-center justify-center text-center bd-4 ma-1 pointer"
-                      height="auto"
+                      :class="sItem.classes"
                       max-height="180px"
+                      elevation="12"
+                      :title="sItem.title"
                       light
                       @click="openSDialog(sItem)"
                     >
                       <v-img
-                        :alt="sItem.title"
                         :src="sItem.src"
-                        class="grey lighten-3 bd-4"
+                        :alt="sItem.title"
+                        class="ma-1 bd-4"
                         sizes="auto"
                         aspect-ratio="1.7778"
                       ></v-img>
                     </v-sheet>
                   </v-col>
-                  <v-col cols="6" align="center" class="align-center">
+                  <v-col cols="6">
                     <v-sheet
-                      color="ghostwhite"
-                      class="d-block align-center justify-center text-center bd-4 ma-1 pointer"
-                      height="auto"
+                      class="pa-1 bd-4 bd-pink4 pointer"
                       max-height="180px"
+                      elevation="16"
+                      title="กลับเมนูหลัก"
                       light
                       @click="closeFlow2()"
                     >
-                      <v-icon large class="mx-auto mb-1 t-light">
-                        mdi-arrow-left-thick
-                      </v-icon>
-                      <br />
-                      <span class="mx-auto medium t-light">
-                        กลัย
-                      </span>
+                      <v-img
+                        src="~/src/assets/images/btn1.svg"
+                        alt="Back"
+                        class="ma-1 bd-4"
+                        sizes="auto"
+                        aspect-ratio="1.7778"
+                      ></v-img>
                     </v-sheet>
                   </v-col>
                 </v-row>
@@ -175,58 +176,66 @@
           </v-card>
           <v-spacer />
         </v-card-text>
-        <v-card-text v-if="flow3 === true" align="center" class="pt-0">
+        <v-card-text
+          v-if="flow3 === true"
+          class="align-center py-0"
+          align="center"
+        >
           <v-spacer />
           <v-card
             light
             elevation="0"
-            class="mx-auto mt-0 pa-2 bg-white"
+            color="transparent"
+            class="mt-0 pa-1 mx-auto"
             max-width="400px"
           >
-            <v-card-text class="align-center" align="center">
+            <v-card-text class="transparent pa-1" align="center">
               <v-container fluid>
                 <v-row align="center" justify="center">
-                  <v-col
-                    v-for="bItem in bItems"
-                    :key="bItem.id"
-                    cols="6"
-                    align="center"
-                    class="align-center"
-                  >
+                  <v-col v-for="bItem in bItems" :key="bItem.id" cols="6">
                     <v-sheet
                       color="transparent"
-                      class="align-center justify-center text-center bd-4 pointer"
-                      height="auto"
+                      :class="bItem.classes"
                       max-height="180px"
+                      elevation="18"
                       light
                       @click="openBDialog(bItem)"
                     >
+                      <v-icon
+                        v-if="bItem.src.startsWith('mdi')"
+                        :color="bItem.color"
+                        class="mx-auto mt-auto mb-1"
+                        large
+                      >
+                        {{ bItem.src }}
+                      </v-icon>
                       <v-img
-                        :alt="bItem.title"
+                        v-else-if="!bItem.src.startsWith('mdi')"
                         :src="bItem.src"
-                        class="grey lighten-3 bd-4"
-                        width="100%"
-                        height="auto"
-                        aspect-ratio="1.7778"
+                        class="flex mx-auto mt-auto mb-1"
+                        sizes="auto"
+                        max-height="28px"
                       ></v-img>
+                      <br />
+                      <span class="medium t-light mx-auto mb-auto mt-0">
+                        {{ bItem.title }}
+                      </span>
                     </v-sheet>
                   </v-col>
-                  <v-col cols="6" align="center" class="align-center">
+                  <v-col cols="6">
                     <v-sheet
-                      color="transparent"
-                      class="d-block align-center justify-center text-center btn2-2 bd-4 pointer py-2"
-                      height="auto"
+                      class="pa-1 bd-4 bd-pink4 pointer"
                       max-height="180px"
+                      elevation="18"
                       light
                       @click="closeFlow3()"
                     >
-                      <v-icon large class="mx-auto mb-1 mt-auto t-light">
-                        mdi-arrow-left-thick
-                      </v-icon>
-                      <br />
-                      <span class="mx-auto mt-0 mb-auto medium t-light">
-                        กลัย
-                      </span>
+                      <v-img
+                        :src="flowSrc"
+                        class="ma-1 bd-4"
+                        sizes="auto"
+                        aspect-ratio="1.7778"
+                      ></v-img>
                     </v-sheet>
                   </v-col>
                 </v-row>
@@ -254,7 +263,7 @@
         >
           <v-card-text align="center" class="dark3 align-center pa-0">
             <v-card class="transparent pa-2" elevation="0">
-              <v-card-title class="transparent large align-center t-white py-0">
+              <v-card-title class="transparent large align-center t-white">
                 <v-spacer />
                 {{ dSub }}
                 <v-spacer />
@@ -279,10 +288,10 @@
                       "
                       cols="12"
                       align="center"
-                      class="align-end justify-center text-center py-1 px-1 mb-1 transparent"
+                      class="align-end justify-center text-center pb-1 pt-2 px-1 transparent"
                     >
                       <span
-                        class="justify-center text-center mx-auto mb-1 mt-auto medium t-white"
+                        class="d-flex justify-center text-center pa-1 mx-auto mb-0 mt-auto medium t-white"
                       >
                         {{ sellItem.data }}
                       </span>
@@ -300,14 +309,14 @@
                       align="center"
                       class="d-inline-flex flex flex-nowrap align-center justify-center text-center py-1 px-1 bg-white bd-4"
                     >
-                      <span :id="sellItem.id" class="medium t-light">
+                      <span :id="sellItem.id" class="flex my-1 medium t-light">
                         {{ sellItem.data }}
                       </span>
                       <v-btn
                         v-if="sellItem.id === '2' || sellItem.id === '4'"
                         title="คัดลอก"
                         :color="color"
-                        class="ml-1"
+                        class="flex my-1 ml-1"
                         dark
                         icon
                         x-small
@@ -364,7 +373,7 @@
         >
           <v-card-text align="center" class="dark3 align-center pa-0">
             <v-card class="transparent pa-2" elevation="0">
-              <v-card-title class="transparent large align-center t-white py-0">
+              <v-card-title class="transparent large align-center t-white">
                 <v-spacer />
                 {{ dSub2 }}
                 <v-spacer />
@@ -389,10 +398,10 @@
                       "
                       cols="12"
                       align="center"
-                      class="d-flex align-end justify-center text-center py-1 px-1 transparent"
+                      class="align-end justify-center text-center pb-1 pt-2 px-1 transparent"
                     >
                       <span
-                        class="text-center mx-auto mb-0 mt-2 medium t-white"
+                        class="d-flex justify-center text-center pa-1 mx-auto mb-0 mt-auto medium t-white"
                       >
                         {{ buyItem.data }}
                       </span>
@@ -410,7 +419,7 @@
                       align="center"
                       class="d-inline-flex flex flex-nowrap align-center justify-center text-center py-1 px-1 bg-white bd-4"
                     >
-                      <span :id="buyItem.id" class="medium t-light">
+                      <span :id="buyItem.id" class="flex my-1 medium t-light">
                         {{ buyItem.data }}
                       </span>
                       <v-btn
@@ -421,7 +430,7 @@
                         "
                         title="คัดลอก"
                         :color="color2"
-                        class="ml-1"
+                        class="flex my-1 ml-1"
                         dark
                         icon
                         x-small
@@ -481,6 +490,7 @@
 
 <script>
 import CustomFooter from "../../components/CustomFooter.vue";
+import { newOrderBuys, newOrderSells } from "../../utils/datas";
 
 export default {
   name: "NewOrder",
@@ -525,7 +535,7 @@ export default {
         }
       ],
       flow1Src:
-        "https://res.cloudinary.com/dckrvb0rw/image/upload/v1688366320/public/svg/btn4-2_ure3cc.svg",
+        "https://res.cloudinary.com/dckrvb0rw/image/upload/v1691754088/public/web/btn1_jzydte.svg",
       sellItems: [],
       buyItems: [],
       errSnack: false,
@@ -570,236 +580,12 @@ export default {
       this.sccMsg2 = "คัดลอกแล้ว!";
     },
     loadNewOrderSells() {
-      this.sItems = [
-        {
-          id: "s01",
-          title: "Paypal",
-          accLabel: "ชำระเงินมาที่",
-          acc: "ppemail@domail.com",
-          nLabel: "ชื่อบัญชี",
-          name: "FS-Exchanger",
-          fLabel: "เอกสารที่ต้องใช้",
-          file: "แคปภาพใบเสร็จ/ภาพสลิปโอน",
-          dLabel: "ข้อบังคับ",
-          detail: "ต้องเลือกส่งแบบชำระสินค้า",
-          desLabel: "คำเตือน!",
-          description: "ต้องชำระแบบ",
-          src:
-            "https://res.cloudinary.com/dckrvb0rw/image/upload/v1691483328/public/currencies/pp-svg-hd.svg",
-          color: "#0072B5",
-          classes: "align-center justify-center text-center bd-rb"
-        },
-        {
-          id: "s02",
-          title: "Web Money",
-          accLabel: "ชำระเงินมาที่",
-          acc: "ppemail@domail.com",
-          nLabel: "ชื่อบัญชี",
-          name: "FS-Exchanger",
-          fLabel: "เอกสารที่ต้องใช้",
-          file: "แคปภาพใบเสร็จ/ภาพสลิปโอน",
-          dLabel: "ข้อบังคับ",
-          detail: "ต้องเลือกส่งแบบชำระสินค้า",
-          desLabel: "คำเตือน!",
-          description: "ต้องชำระแบบ",
-          src:
-            "https://res.cloudinary.com/dckrvb0rw/image/upload/v1691483328/public/currencies/wm-svg-hd.svg",
-          color: "#34568B",
-          classes: "align-center justify-center text-center bd-b"
-        },
-        {
-          id: "s03",
-          title: "Perfect Money",
-          accLabel: "ชำระเงินมาที่",
-          acc: "ppemail@domail.com",
-          nLabel: "ชื่อบัญชี",
-          name: "FS-Exchanger",
-          fLabel: "เอกสารที่ต้องใช้",
-          file: "แคปภาพใบเสร็จ/ภาพสลิปโอน",
-          dLabel: "ข้อบังคับ",
-          detail: "ต้องเลือกส่งแบบชำระสินค้า",
-          desLabel: "คำเตือน!",
-          description: "ต้องชำระแบบ",
-          src:
-            "https://res.cloudinary.com/dckrvb0rw/image/upload/v1691521756/public/currencies/pm-svg-hd.svg",
-          color: "#E9897E",
-          classes: "align-center justify-center text-center bd-rb"
-        },
-        {
-          id: "s04",
-          title: "Neteller",
-          accLabel: "ชำระเงินมาที่",
-          acc: "ppemail@domail.com",
-          nLabel: "ชื่อบัญชี",
-          name: "FS-Exchanger",
-          fLabel: "เอกสารที่ต้องใช้",
-          file: "แคปภาพใบเสร็จ/ภาพสลิปโอน",
-          dLabel: "ข้อบังคับ",
-          detail: "ต้องเลือกส่งแบบชำระสินค้า",
-          desLabel: "คำเตือน!",
-          description: "ต้องชำระแบบ",
-          src:
-            "https://res.cloudinary.com/dckrvb0rw/image/upload/v1691521756/public/currencies/nt-svg-hd.svg",
-          color: "#00A170",
-          classes: "align-center justify-center text-center bd-b"
-        },
-        {
-          id: "s05",
-          title: "Skrill",
-          accLabel: "ชำระเงินมาที่",
-          acc: "ppemail@domail.com",
-          nLabel: "ชื่อบัญชี",
-          name: "FS-Exchanger",
-          fLabel: "เอกสารที่ต้องใช้",
-          file: "แคปภาพใบเสร็จ/ภาพสลิปโอน",
-          dLabel: "ข้อบังคับ",
-          detail: "ต้องเลือกส่งแบบชำระสินค้า",
-          desLabel: "คำเตือน!",
-          description: "ต้องชำระแบบ",
-          src:
-            "https://res.cloudinary.com/dckrvb0rw/image/upload/v1691521757/public/currencies/sk-svg-hd.svg",
-          color: "#d46187",
-          classes: "align-center justify-center text-center bd-r"
-        }
-      ];
+      const sItems = newOrderSells();
+      this.sItems = sItems;
     },
     loadNewOrderBuys() {
-      this.bItems = [
-        {
-          id: "b01",
-          title: "ธนาคาร",
-          accLabel: "ชื่อธนาคาร",
-          acc: "กสิกรไทย",
-          nLabel: "เลขที่บัญชี",
-          name: "0078750065",
-          dLabel: "ชื่อบัญชี",
-          detail: "นาง ชลธิ เตชะ",
-          dLabel2: "ประเภท",
-          detail2: "ออมทรัพย์",
-          fLabel: "เอกสารที่ต้องใช้",
-          file: "แคปภาพใบเสร็จ/ภาพสลิปโอน",
-          desLabel: "คำเตือน!",
-          description: "ต้องชำระแบบ",
-          src: "mdi-bank",
-          color: "#00A170",
-          classes: "align-center justify-center text-center bd-rb"
-        },
-        {
-          id: "b02",
-          title: "ทรู วอเลท",
-          accLabel: "หมานเลจ",
-          acc: "0865001236",
-          nLabel: "ชื่อบัญชี",
-          name: "นาง ชลธิ เตชะ",
-          dLabel: "",
-          detail: "",
-          dLabel2: "",
-          detail2: "",
-          fLabel: "เอกสารที่ต้องใช้",
-          file: "แคปภาพใบเสร็จ/ภาพสลิปโอน",
-          desLabel: "คำเตือน!",
-          description: "ต้องชำระแบบ",
-          src:
-            "https://res.cloudinary.com/dckrvb0rw/image/upload/v1691522471/public/icons/tmn.svg",
-          color: "#00A170",
-          classes: "align-center justify-center text-center bd-b"
-        },
-        {
-          id: "b03",
-          title: "ดอลฟิน วอเลท",
-          accLabel: "โอนเงินมาที่",
-          acc: "0865001236",
-          nLabel: "ชื่อบัญชี",
-          name: "นาง ชลธิ เตชะ",
-          dLabel: "",
-          detail: "",
-          dLabel2: "",
-          detail2: "",
-          fLabel: "เอกสารที่ต้องใช้",
-          file: "แคปภาพใบเสร็จ/ภาพสลิปโอน",
-          desLabel: "คำเตือน!",
-          description: "ต้องชำระแบบ",
-          src: "#",
-          color: "#00A170",
-          classes: "align-center justify-center text-center bd-rb"
-        },
-        {
-          id: "b04",
-          title: "พร้อมเพย์",
-          accLabel: "หมายเลขพร้อมเพย์",
-          acc: "0865001236",
-          nLabel: "ชื่อบัญชี",
-          name: "นาง ชลธิ เตชะ",
-          dLabel: "",
-          detail: "",
-          dLabel2: "",
-          detail2: "",
-          fLabel: "เอกสารที่ต้องใช้",
-          file: "แคปภาพใบเสร็จ/ภาพสลิปโอน",
-          desLabel: "คำเตือน!",
-          description: "ต้องชำระแบบ",
-          src: "#",
-          color: "#00A170",
-          classes: "align-center justify-center text-center bd-b"
-        },
-        {
-          id: "b05",
-          title: "Facebook Pay",
-          accLabel: "ชำระมาที่",
-          acc: "@fs-exchanger",
-          nLabel: "ชื่อบัญชี",
-          name: "นาง ชลธิ เตชะ",
-          dLabel: "",
-          detail: "",
-          dLabel2: "ประเภท",
-          detail2: "บุคลล",
-          fLabel: "เอกสารที่ต้องใช้",
-          file: "แคปภาพใบเสร็จ/ภาพสลิปโอน",
-          desLabel: "คำเตือน!",
-          description: "ต้องชำระแบบ",
-          src: "mdi-facebook",
-          color: "#00A170",
-          classes: "align-center justify-center text-center bd-rb"
-        },
-        {
-          id: "b06",
-          title: "WeChat Pay",
-          accLabel: "ส่งเงินมาที่",
-          acc: "fs.wechat@fs-exchange.com",
-          nLabel: "",
-          name: "",
-          dLabel: "ชื่อบัญชี",
-          detail: "นาง ชลธิ เตชะ",
-          dLabel2: "ประเภท",
-          detail2: "personal",
-          fLabel: "เอกสารที่ต้องใช้",
-          file: "แคปภาพใบเสร็จ/ภาพสลิปโอน",
-          desLabel: "คำเตือน!",
-          description: "ต้องชำระแบบ",
-          src: "#",
-          color: "#00A170",
-          classes: "align-center justify-center text-center bd-b"
-        },
-        {
-          id: "b07",
-          title: "Line BK",
-          accLabel: "ไลน์ไออดี",
-          acc: "fs-rate",
-          nLabel: "ชื่อโปรไฟล์",
-          name: "FS EXCHANGER",
-          dLabel: "",
-          detail: "",
-          dLabel2: "ประเภท",
-          detail2: "บุคลล",
-          fLabel: "เอกสารที่ต้องใช้",
-          file: "แคปภาพใบเสร็จ/ภาพสลิปโอน",
-          desLabel: "คำเตือน!",
-          description: "ต้องชำระแบบ",
-          src: "#",
-          color: "#00b900",
-          classes: "align-center justify-center text-center bd-r"
-        }
-      ];
+      const bItems = newOrderBuys();
+      this.bItems = bItems;
     },
     openFlow2(item) {
       this.flow1 = false;
