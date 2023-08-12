@@ -1,0 +1,234 @@
+<template>
+  <v-row align="center" justify="center">
+    <v-col
+      cols="12"
+      sm="12"
+      md="8"
+      lg="6"
+      xl="5"
+      class="px-1 py-2"
+      align="center"
+    >
+      <v-card light elevation="0" color="transparent">
+        <v-card-text class="transparent" style="height: 46px"></v-card-text>
+        <v-card-title class="large t-light">
+          <v-spacer />
+          ศูนย์สมาชิก
+          <v-spacer />
+        </v-card-title>
+        <v-card-text align="center" class="align-center py-2">
+          <v-spacer />
+          <v-card
+            light
+            elevation="0"
+            class="mx-auto mt-0 pa-1 bg10-2"
+            max-width="440px"
+          >
+            <v-card-text align="center" class="align-start px-1 pt-0">
+              <v-container fluid>
+                <v-row align="start" justify="center">
+                  <v-col cols="12" align="center" class="align-start">
+                    <v-toolbar light color="transparent" elevation="0" dense class="mt-0 mb-2">
+                      <v-spacer />
+                      <v-toolbar-title class="mr-0 ml-auto medium">
+                        สถานะ&colon;
+                      </v-toolbar-title>
+                      <v-btn
+                        :color="uColor"
+                        class="mr-1 medium pointer"
+                        dark
+                        text
+                        x-small
+                        nuxt
+                        :to="uLink"
+                      >
+                        {{ uText }}
+                      </v-btn>
+                      <v-btn
+                        color="blue darken-1"
+                        class="mr-auto ml-0 medium pointer"
+                        dark
+                        icon
+                        x-small
+                        @click="refresh()"
+                      >
+                        <v-icon>
+                          mdi-refresh
+                        </v-icon>
+                      </v-btn>
+                      <v-spacer />
+                    </v-toolbar>
+                  </v-col>
+                </v-row>
+                <v-row align="center" justify="center">
+                  <v-col
+                    v-for="item in items"
+                    :key="item.id"
+                    cols="6"
+                    :class="item.classes"
+                    align="center"
+                  >
+                    <v-sheet
+                      v-if="item.id === '3'"
+                      color="transparent"
+                      class="d-block align-center justify-center text-center pa-sm-3 pa-md-4 pa-lg-5 pa-xl-6 pointer"
+                      height="auto"
+                      max-height="200px"
+                      elevation="0"
+                      light
+                      @click="$router.push(item.link)"
+                    >
+                      <v-icon large class="mx-auto mb-1 t-light">
+                        {{ item.icon }}
+                      </v-icon>
+                      <br>
+                      <span class="mx-auto t-light">
+                        {{ item.title }}
+                      </span>
+                      <span
+                        v-if="newCount > 0"
+                        class="d-flex bd-50 px-2 py-1 red t-white align-center text-center medium"
+                        style="width: auto; height: auto; position: absolute; top: 2px; left: 51.5%;"
+                      >
+                        {{ newCount }}
+                      </span>
+                    </v-sheet>
+                    <v-sheet
+                      v-else
+                      color="transparent"
+                      class="d-block align-center justify-center text-center pa-sm-3 pa-md-4 pa-lg-5 pa-xl-6 pointer"
+                      height="auto"
+                      max-height="200px"
+                      elevation="0"
+                      light
+                      @click="$router.push(item.link)"
+                    >
+                      <v-icon large class="mx-auto mb-1 t-light">
+                        {{ item.icon }}
+                      </v-icon>
+                      <br>
+                      <span class="mx-auto t-light">
+                        {{ item.title }}
+                      </span>
+                    </v-sheet>
+                  </v-col>
+                  <v-col
+                    v-if="user.createdFrom === 'email'"
+                    cols="6"
+                    class="align-center justify-center text-center bd-rt"
+                    align="center"
+                  >
+                    <v-sheet
+                      color="transparent"
+                      class="d-block align-center justify-center text-center pa-sm-3 pa-md-4 pa-lg-5 pa-xl-6 pointer"
+                      height="auto"
+                      max-height="200px"
+                      elevation="0"
+                      light
+                      @click="$router.push('/update-password')"
+                    >
+                      <v-icon large class="mx-auto mb-1 t-light">
+                        mdi-key
+                      </v-icon>
+                      <br>
+                      <span class="mx-auto t-light">
+                        เปลี่ยนรหัสผ่าน
+                      </span>
+                    </v-sheet>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+          </v-card>
+          <v-spacer />
+        </v-card-text>
+        <v-card-text align="center" class="align-center">
+          <custom-footer />
+        </v-card-text>
+      </v-card>
+      <br><br>
+      <v-snackbar
+        v-model="errSnack"
+        color="error"
+        class="pa-2 align-center text-center medium"
+        :timeout="6000"
+        max-width="400px"
+        dark
+        centered
+      >
+        {{ errMsg }}
+      </v-snackbar>
+    </v-col>
+  </v-row>
+</template>
+
+<script>
+import CustomFooter from "../../components/CustomFooter.vue";
+import { userData } from "../../utils/datas";
+
+export default {
+  name: "Users",
+
+  components: {
+    CustomFooter
+  },
+
+  data() {
+    return {
+      uText: '',
+      uColor: '',
+      uLink: '',
+      items: [
+        { id: '1', title: 'บัญชีของฉัน', classes: 'align-center justify-center text-center bd-rb', icon: 'mdi-account', link: '/account' },
+        { id: '2', title: 'ธนาคาร', classes: 'align-center justify-center text-center bd-b', icon: 'mdi-bank', link: '/bank' },
+        { id: '3', title: 'ข้อความ', classes: 'align-center justify-center text-center bd-r', icon: 'mdi-inbox', link: '/messages' },
+        { id: '4', title: 'ความเป็นส่วนตัว', classes: 'align-center justify-center text-center', icon: 'mdi-cog', link: '/privacy' }
+      ],
+      user: {},
+      errSnack: false,
+      errMsg: null,
+      newCount: 7
+    };
+  },
+
+  head () {
+    return {
+      title: 'ศูนย์สมาชิกก',
+      link: [
+        { rel: 'favicon', type: 'image/x-icon', href: '/favicon.ico' }
+      ]
+    };
+  },
+
+  mounted () {
+    const user = this.user;
+    if (user.tags === 'verified') {
+      this.uText = 'ยืนยันตัวตนแล้ว';
+      this.uColor = 'success';
+      this.uLink ='`/account';
+    } else if (user.tags === 'unverified') {
+      this.uText = 'ยังไม่ยืนยันตัวตน!';
+      this.uColor = 'error';
+    }
+
+    if (user.account.passportStatus !== 'verified' && user.bank.bankStatus === 'verified') {
+      this.uLink = '/account';
+    } else if (user.account.passportStatus === 'verified' && user.bank.bankStatus !== 'verified') {
+      this.uLink = '/bank';
+    } else if (user.account.passportStatus !== 'verified' && user.bank.bankStatus !== 'verified') {
+      this.uLink = '/account';
+    }
+  },
+
+  created() {
+    const user = userData();
+    this.user = user;
+  },
+
+  methods: {
+    refresh () {
+      this.$nuxt.refresh();
+    }
+  }
+};
+</script>

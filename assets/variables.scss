@@ -27,6 +27,11 @@ $demo5: #8e0369;
 
 /* Globals */
 *,
+html {
+  box-sizing: border-box;
+}
+
+*,
 html,
 body,
 template {
@@ -36,7 +41,7 @@ template {
   letter-spacing: 0.0178571429em;
   word-spacing: normal;
   word-wrap: break-word;
-  font-size-adjust: none;
+  font-size-adjust: 100%;
   line-height: 1.5;
 }
 

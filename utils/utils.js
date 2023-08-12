@@ -176,16 +176,16 @@ export function getPassStatus(account) {
 
 export function getSocialName(social) {
   switch (social.socialName) {
-    case "TrueWallet":
-      return "ทรู วอเลท/True Wallet";
-    case "FacebookPay":
-      return "เฟสบุ๊ค เพย์/Facebook Pay";
-    case "WeChatPay":
-      return "วีแชท เพย์/WeChat Pay";
-    case "DolphinWallet":
-      return "ดอลฟิน/Dolphin";
-    case "PromptPay":
-      return "พรร้อมเพย์/Prompt Pay";
+    case "TMN":
+      return "ทรู วอเลท";
+    case "FBPAY":
+      return "เฟสบุ๊ค เพย์";
+    case "WCPAY":
+      return "วีแชท เพย์";
+    case "DOLPHIN":
+      return "ดอลฟิน";
+    case "PROMPT":
+      return "พรร้อมเพย์";
     default:
       return "";
   }
@@ -195,15 +195,15 @@ export function getReceiver(order) {
   const pattern = /.(?=.{4})/g;
   const val = String(order.receiver).replace(pattern, " ");
   let text;
-  if (order.receiver.startsWith("PromptPay")) {
+  if (order.receiver.startsWith("PROMPT")) {
     text = "PromptPay<" + val + ">";
-  } else if (order.receiver.startsWith("TrueWallet")) {
+  } else if (order.receiver.startsWith("TMN")) {
     text = "TrueWallet<" + val + ">";
-  } else if (order.receiver.startsWith("FacebookPay")) {
+  } else if (order.receiver.startsWith("FBPAY")) {
     text = "FacebookPay<" + val + ">";
-  } else if (order.receiver.startsWith("WeChatPay")) {
+  } else if (order.receiver.startsWith("WCPAY")) {
     text = "WeChatPay<" + val + ">";
-  } else if (order.receiver.startsWith("DolphinWallet")) {
+  } else if (order.receiver.startsWith("DOLPHIN")) {
     text = "DolphinWallet<" + val + ">";
   } else {
     text = "ธนาคาร<--" + val + ">";

@@ -66,6 +66,22 @@
   background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1691534265/public/svg/bg-animate.svg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
+.bg-animate-light {
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1692065766/public/svg/bg-animate-light_jximlj.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-attachment: fixed;
+}
+
+.bg-animate3 {
+  background-size: cover;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1692064592/public/svg/bg-animate2.svg");
+  background-repeat: no-repeat;
   background-position: center top;
   background-attachment: fixed;
 }
@@ -219,6 +235,20 @@
   background-position: center top;
 }
 
+.grad8 {
+  background: linear-gradient(0deg, #f700b6, #88286e);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+.grad9 {
+  background: linear-gradient(180deg, #f700b6, #88286e);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
 .logo-compact2 {
   display: flex;
   position: absolute;
@@ -227,7 +257,7 @@
 }
 
 .btn1 {
-  background: radial-gradient(at center, ghostwhite, #cccccc);
+  background: radial-gradient(at center, #ffffff, ghostwhite);
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;

@@ -133,7 +133,7 @@
         </v-btn>
       </v-app-bar>
       <v-card-actions
-        class="d-flex grad2 px-1 py-2 align-center mx-2 mb-1 bd-7 bd-pink2 shadow"
+        class="d-flex grad9 px-1 py-2 align-center mx-2 mb-1 bd-7 bd-pink2 shadow"
         align="center"
       >
         <v-spacer />
@@ -313,7 +313,7 @@
           elevation="0"
           link
           router
-          to="/account"
+          to="/users"
           exact
         >
           <span class="d-block align-center justify-center text-center pa-1">
@@ -326,7 +326,7 @@
             </span>
             <span
               v-if="newCount > 0"
-              class="d-flex pa-2 bd-50 bg-white text-center align-center red"
+              class="d-flex pa-2 bd-50 text-center align-center red"
               style="position: absolute; top: 3px; left: 51%; width: auto; height: auto; max-height: 18px"
             >
               <small class="white--text small">
@@ -405,152 +405,31 @@
   </v-app>
 </template>
 
-<script>
-import { auth } from "~/plugins/firebase-init";
-
-export default {
-  name: "BasicLayout",
-
-  head: {
-    title: "Nuxt Vuetify Starter",
-    meta: [
-      {
-        name: "viewport",
-        content:
-          "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
-      }
-    ],
-    link: [
-      {
-        rel: "stylesheet",
-        href:
-          "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
-      },
-      {
-        ref: "stylesheet",
-        href:
-          "https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css"
-      },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/icon?family=Material+Icons"
-      },
-      { ref: "stylesheet", href: "https://materialdesignicons.com/icon" }
-    ]
-  },
-
-  data() {
-    return {
-      drawer: true,
-      logo:
-        "https://res.cloudinary.com/dckrvb0rw/image/upload/v1688924150/public/svg/logo2_wemlba.svg",
-      items: [
-        { title: "หน้าหลัก", to: "/" },
-        { title: "เกี่ยวกับเรา", to: "/about" },
-        { title: "นโยบายความเป็นส่วนตัว", to: "/policies/privacy" },
-        { title: "ข้อกำหนดในการให้บริการ", to: "/policies/terms-of-services" },
-        { title: "ข้อกำหนดในการใช้งาน", to: "/policies/terms-of-used" },
-        { title: "ข้อกำหนดและเงื่อนไข", to: "/policies/terms-and-conditions" },
-        { title: "แหล่งที่มา", to: "/policies/attributions" },
-        { title: "ข้อมูลอ้างอิง", to: "/policies/references" }
-      ],
-      fab: false,
-      direction: "bottom",
-      transition: "slide-y-reverse-transition",
-      speedItems: [
-        {
-          color: "success",
-          link: "#",
-          icon: "mdi-chat"
-        },
-        {
-          color: "#0072B5",
-          link: "#",
-          icon: "mdi-phone"
-        },
-        {
-          color: "#004a75",
-          link: "#",
-          icon: "mdi-facebook-messenger"
-        },
-        {
-          color: "green darken-1",
-          link: "#",
-          icon: "mdi-whatsapp"
-        },
-        {
-          color: "blue darken-3",
-          link: "#",
-          icon: "mdi-twitter"
-        },
-        {
-          color: "blown darken-3",
-          link: "#",
-          icon: "mdi-email"
-        }
-      ],
-      newMessages: false,
-      newCount: 7
-    };
-  },
-
-  computed: {
-    IS_AUTHENTICATED() {
-      return this.$store.getters.IS_AUTHENTICAATED;
-    },
-    uid() {
-      return this.$store.state.uid;
-    },
-    isNewCount() {
-      return this.newCount > 0;
-    },
-    colors() {
-      let color = "black";
-      if (this.newCount === 0) {
-        color = "yellow";
-      }
-      return color;
-    }
-  },
-
-  mounted() {
-    if (this.newCount && this.newCount > 0) {
-      this.newMessages = true;
-    }
-  },
-
-  methods: {
-    async logout() {
-      await auth.signOut();
-      await this.$store.dispatch("sessionLogout");
-      await this.$store.dispatch("SET_SESSION_COOKIE", { idToken: null });
-      this.$store.commit("SET_UID", null);
-      this.$router.push("/");
-    }
-  }
-};
-</script>
-
 <style>
 @import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
 
 @font-face {
   src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "monospace";
 }
 
 /* Globals */
 *,
+html {
+  box-sizing: border-box;
+}
+
+*,
 html,
 body,
 template {
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", monospace;
   font-size: 0.875rem;
   font-weight: 300;
   letter-spacing: 0.0178571429em;
   word-spacing: normal;
   word-wrap: break-word;
-  font-size-adjust: none;
+  font-size-adjust: 100%;
   line-height: 1.5;
 }
 
@@ -568,12 +447,6 @@ template {
 [light]:below-level {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: subpixel-antialiased;
-}
-
-.t-white {
-  color: #ffffff !important;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
 }
 
 .top {
@@ -620,13 +493,54 @@ template {
   position: fixed;
   bottom: 60px;
   right: 5px;
+  z-index: 1;
 }
 
 .pointer {
   cursor: pointer;
 }
 
-/* Backgrounds and buttons */
+a,
+.link,
+nuxt-link {
+  text-decoration: none;
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+    "Droid Sans Mono", monospace, monospace;
+}
+
+::placeholder,
+[label],
+[value],
+input,
+input[label],
+input::placeholder,
+v-text-field,
+v-text-field::placeholder,
+v-text-field::-ms-value,
+v-text-field[label],
+v-text-field[value],
+v-text-field[option],
+v-text-field::after,
+v-text-field:below-level,
+v-autocomplete,
+v-autocomplete[label],
+v-autocomplete::after,
+v-autocomplete::selection,
+v-autocomplete::placeholder,
+v-autocomplete:below-level,
+v-file-input,
+v-file-input[label],
+v-file-input[value],
+v-file-input::-ms-value,
+v-file-input::after,
+v-file-input::placeholder,
+v-file-input:below-level {
+  font-size: 0.7765456789rem;
+  align-items: center;
+  text-align: center;
+  text-justify: auto;
+}
+
 .bg4 {
   background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687439353/public/svg/bg4_f33lc3.svg");
   background-size: cover;
@@ -695,6 +609,22 @@ template {
   background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1691534265/public/svg/bg-animate.svg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
+.bg-animate-light {
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1692065766/public/svg/bg-animate-light_jximlj.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-attachment: fixed;
+}
+
+.bg-animate3 {
+  background-size: cover;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1692064592/public/svg/bg-animate2.svg");
+  background-repeat: no-repeat;
   background-position: center top;
   background-attachment: fixed;
 }
@@ -717,7 +647,7 @@ template {
   background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687439354/public/svg/btn-left2.svg");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: left center;
+  background-position: center left;
 }
 
 .btn-right2 {
@@ -806,14 +736,98 @@ template {
   background-size: 100% 100%;
 }
 
-/* Text and borders */
+.grad1 {
+  background: linear-gradient(180deg, #ffffff, #e1a5d1);
+  background-size: 100% 100%;
+  background-position: center top;
+}
+
+.grad2 {
+  background: linear-gradient(180, #e002a5, #982278);
+  background-size: 100% 100%;
+  background-position: center top;
+}
+
+.grad3 {
+  background: linear-gradient(270deg, #e1a5d11a, #e002a5);
+  background-size: 100% 100%;
+  background-position: left center;
+}
+
+.grad4 {
+  background: linear-gradient(90deg, #e1a5d11a, #e002a5);
+  background-size: 100% 100%;
+  background-position: right center;
+}
+
+.grad5 {
+  background: radial-gradient(at top, #e1a5d1, #88286e);
+  background-size: 100% 100%;
+  background-position: center top;
+}
+
+.grad6 {
+  background: radial-gradient(#e002a5, #e1a5d1);
+  background-size: 100% 100%;
+  background-position: center center;
+}
+
+.grad7 {
+  background: linear-gradient(0deg, #521943c0, #932c77c2);
+  background-size: 100% 100%;
+  background-position: center top;
+}
+
+.grad8 {
+  background: linear-gradient(0deg, #f700b6, #88286e);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+.grad9 {
+  background: linear-gradient(180deg, #f700b6, #88286e);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+.logo-compact2 {
+  display: flex;
+  position: absolute;
+  top: 5px;
+  left: 2px;
+}
+
+.btn1 {
+  background: radial-gradient(at center, #ffffff, ghostwhite);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.btn2 {
+  background: radial-gradient(at center, #521943, #932c77);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.btn2-2 {
+  background: radial-gradient(at center, #521943c0, #932c77c2);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Text and Borde */
 .t-transparent {
   color: transparent !important;
 }
 
 .t-text {
   font-family: "Roboto", sans-serif;
-  font-size: 11px;
+  font-size: 0.655rem !important;
   letter-spacing: 0.0178571429em;
 }
 
@@ -849,6 +863,12 @@ template {
   font-size: 0.9rem;
   letter-spacing: 0.0175em;
   font-weight: 400;
+}
+
+.t-white {
+  color: #ffffff !important;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 .t-light {
@@ -983,7 +1003,7 @@ template {
 .bd-pink2 {
   border-left: 1px groove #ffd5f4;
   border-right: 1px groove #ffd5f4;
-  border-top: 1px groove #ffffff;
+  border-top: 1px groove #ffd5f4;
   border-bottom: 1px groove #ffd5f4;
 }
 
@@ -1047,109 +1067,6 @@ template {
   border-left: 1px double #f700b6 !important;
 }
 
-a,
-.link,
-nuxt-link {
-  text-decoration: none;
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-    "Droid Sans Mono", monospace, monospace;
-}
-
-::placeholder,
-[label],
-v-text-field,
-v-text-field::placeholder,
-v-text-field::-ms-value,
-v-text-field[label],
-v-text-field[value],
-v-text-field::after,
-v-text-field:below-level,
-v-autocomplete,
-v-autocomplete[label],
-v-autocomplete::after,
-v-autocomplete::selection,
-v-autocomplete:below-level,
-v-file-input,
-v-file-input[label],
-v-file-input[value],
-v-file-input::-ms-value,
-v-file-input::after,
-v-file-input::placeholder,
-v-file-input:below-level {
-  font-size: 0.7765456789rem;
-  align-items: center;
-  text-align: center;
-}
-
-.grad1 {
-  background: linear-gradient(180deg, #ffffff, #e1a5d1);
-  background-size: 100% 100%;
-  background-position: center top;
-}
-
-.grad2 {
-  background: linear-gradient(180deg, #e002a5, #982278);
-  background-size: 100% 100%;
-  background-position: center top;
-}
-
-.grad5 {
-  background: radial-gradient(at top, #e1a5d1, #88286e);
-  background-size: 100% 100%;
-  background-position: center top;
-}
-
-.grad6 {
-  background: radial-gradient(#e002a5, #e1a5d1);
-  background-size: 100% 100%;
-  background-position: center center;
-}
-
-.grad7 {
-  background: linear-gradient(0deg, #521943c0, #932c77c2);
-  background-size: 100% 100%;
-  background-position: center top;
-}
-
-.logo-compact2 {
-  display: flex;
-  position: absolute;
-  top: 5px;
-  left: 2px;
-}
-
-.btn1 {
-  background: radial-gradient(at center, ghostwhite, #cccccc);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-.btn2 {
-  background: radial-gradient(at center, #521943, #932c77);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-.btn2-2 {
-  background: radial-gradient(at center, #521943c0, #932c77c2);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-.t-gtad1 {
-  fill: linearGradient1;
-}
-
-@keyframes linearGradient1 {
-  0% {
-    background: linear-gradient(180deg, #ffffff, #ffd5f4);
-    background-size: 100% 100%;
-  }
-}
-
 @media screen and (max-width: 900px) {
   *,
   .medium {
@@ -1164,3 +1081,129 @@ v-file-input:below-level {
   }
 }
 </style>
+
+<script>
+import { auth } from "~/plugins/firebase-init";
+
+export default {
+  name: "BasicLayout",
+
+  head: {
+    title: "Nuxt Vuetify Starter",
+    meta: [
+      {
+        name: "viewport",
+        content:
+          "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+      }
+    ],
+    link: [
+      {
+        rel: "stylesheet",
+        href:
+          "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+      },
+      {
+        ref: "stylesheet",
+        href:
+          "https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css"
+      },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/icon?family=Material+Icons"
+      },
+      { ref: "stylesheet", href: "https://materialdesignicons.com/icon" }
+    ]
+  },
+
+  data() {
+    return {
+      drawer: true,
+      logo:
+        "https://res.cloudinary.com/dckrvb0rw/image/upload/v1688924150/public/svg/logo2_wemlba.svg",
+      items: [
+        { title: "หน้าหลัก", to: "/" },
+        { title: "เกี่ยวกับเรา", to: "/about" },
+        { title: "นโยบายความเป็นส่วนตัว", to: "/policies/privacy" },
+        { title: "ข้อกำหนดในการให้บริการ", to: "/policies/terms-of-services" },
+        { title: "ข้อกำหนดในการใช้งาน", to: "/policies/terms-of-used" },
+        { title: "ข้อกำหนดและเงื่อนไข", to: "/policies/terms-and-conditions" },
+        { title: "แหล่งที่มา", to: "/policies/attributions" },
+        { title: "ข้อมูลอ้างอิง", to: "/policies/references" }
+      ],
+      fab: false,
+      direction: "bottom",
+      transition: "slide-y-reverse-transition",
+      speedItems: [
+        {
+          color: "success",
+          link: "#",
+          icon: "mdi-chat"
+        },
+        {
+          color: "#0072B5",
+          link: "#",
+          icon: "mdi-phone"
+        },
+        {
+          color: "#004a75",
+          link: "#",
+          icon: "mdi-facebook-messenger"
+        },
+        {
+          color: "green darken-1",
+          link: "#",
+          icon: "mdi-whatsapp"
+        },
+        {
+          color: "blue darken-3",
+          link: "#",
+          icon: "mdi-twitter"
+        },
+        {
+          color: "blown darken-3",
+          link: "#",
+          icon: "mdi-email"
+        }
+      ],
+      newMessages: false,
+      newCount: 7
+    };
+  },
+
+  computed: {
+    IS_AUTHENTICATED() {
+      return this.$store.getters.IS_AUTHENTICAATED;
+    },
+    uid() {
+      return this.$store.state.uid;
+    },
+    isNewCount() {
+      return this.newCount > 0;
+    },
+    colors() {
+      let color = "black";
+      if (this.newCount === 0) {
+        color = "yellow";
+      }
+      return color;
+    }
+  },
+
+  mounted() {
+    if (this.newCount && this.newCount > 0) {
+      this.newMessages = true;
+    }
+  },
+
+  methods: {
+    async logout() {
+      await auth.signOut();
+      await this.$store.dispatch("sessionLogout");
+      await this.$store.dispatch("SET_SESSION_COOKIE", { idToken: null });
+      this.$store.commit("SET_UID", null);
+      this.$router.push("/");
+    }
+  }
+};
+</script>

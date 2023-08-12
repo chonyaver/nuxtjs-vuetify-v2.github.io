@@ -1,4 +1,4 @@
-export const user = () => {
+export function userData() {
   return {
     uid: "$uid",
     userId: "user_id",
@@ -48,7 +48,7 @@ export const user = () => {
       lastUpdatePhoto: Date.now()
     }
   };
-};
+}
 
 export const messages = () => {
   return {
@@ -204,8 +204,7 @@ export function newOrderBuys() {
       description: "ต้องชำระแบบ",
       src: "mdi-bank",
       color: "#004c75",
-      classes:
-        "d-block justify-center text-center align-center px-auto py-sm-3 py-md-4 py-lg-5 py-xl-5 btn1 bd-4 bd-nt"
+      classes: "pa-1 bd-4 bd-pp pointer"
     },
     {
       id: "b02",
@@ -223,8 +222,7 @@ export function newOrderBuys() {
       src:
         "https://res.cloudinary.com/dckrvb0rw/image/upload/v1691811791/public/banks/tmn.svg",
       color: "orange",
-      classes:
-        "d-block justify-center text-center align-center px-auto py-sm-3 py-md-4 py-lg-5 py-xl-5 btn1 bd-4 bd-tmn"
+      classes: "pa-1 bd-4 bd-tmn pointer"
     },
     {
       id: "b03",
@@ -241,8 +239,7 @@ export function newOrderBuys() {
       description: "ต้องชำระแบบ",
       src: "#",
       color: "red",
-      classes:
-        "d-block justify-center text-center align-center px-auto py-sm-3 py-md-4 py-lg-5 py-xl-5 btn1 bd-4 bd-pm"
+      classes: "pa-1 bd-4 bd-pm pointer"
     },
     {
       id: "b04",
@@ -260,8 +257,7 @@ export function newOrderBuys() {
       src:
         "https://res.cloudinary.com/dckrvb0rw/image/upload/v1691811791/public/banks/prompt.svg",
       color: "#05a1fd",
-      classes:
-        "d-block justify-center text-center align-center px-auto py-sm-3 py-md-4 py-lg-5 py-xl-5 btn1 bd-4 bd-pp"
+      classes: "pa-1 bd-4 bd-pp pointer"
     },
     {
       id: "b05",
@@ -278,8 +274,7 @@ export function newOrderBuys() {
       description: "ต้องชำระแบบ",
       src: "mdi-facebook",
       color: "#00A170",
-      classes:
-        "d-block justify-center text-center align-center px-auto py-sm-3 py-md-4 py-lg-5 py-xl-5 btn1 bd-4 bd-wm"
+      classes: "pa-1 bd-4 bd-wm pointer"
     },
     {
       id: "b06",
@@ -296,8 +291,7 @@ export function newOrderBuys() {
       description: "ต้องชำระแบบ",
       src: "mdi-wechat",
       color: "#00A170",
-      classes:
-        "d-block justify-center text-center align-center px-auto py-sm-3 py-md-4 py-lg-5 py-xl-5 btn1 bd-4 bd-nt"
+      classes: "pa-1 bd-4 bd-nt pointer"
     },
     {
       id: "b07",
@@ -317,8 +311,69 @@ export function newOrderBuys() {
       src:
         "https://res.cloudinary.com/dckrvb0rw/image/upload/v1691811790/public/banks/linebk.svg",
       color: "#00b900",
-      classes:
-        "d-block justify-center text-center align-center px-auto py-sm-3 py-md-4 py-lg-5 py-xl-5 btn1 bd-4 bd-line"
+      classes: "pa-1 bd-4 bd-line pointer"
+    }
+  ];
+}
+
+export function ordersData() {
+  return [
+    {
+      tag: "o01",
+      path: "currency01",
+      type: "sell",
+      amount: 100,
+      rate: 30,
+      total: 3000,
+      status: "Failed",
+      date: Date.now(),
+      currencyId: "pp02",
+      ordeerURL: "",
+      sstorageURL: "",
+      providerId: "email",
+      uid: "$uid",
+      userId: "$userId",
+      phoneNumber: "+66865001236",
+      failure: "",
+      receiver: "TMN"
+    },
+    {
+      tag: "o02",
+      path: "currency01",
+      type: "sell",
+      amount: 100,
+      rate: 30,
+      total: 3000,
+      status: "Success",
+      date: Date.now(),
+      currencyId: "pp02",
+      ordeerURL: "",
+      sstorageURL: "",
+      providerId: "email",
+      uid: "$uid",
+      userId: "$userId",
+      phoneNumber: "+66865001236",
+      failure: "",
+      receiver: "TMN"
+    },
+    {
+      tag: "o03",
+      path: "currency03",
+      type: "buy",
+      amount: 100,
+      rate: 30,
+      total: 3000,
+      status: "Success",
+      date: Date.now(),
+      currencyId: "pp02",
+      ordeerURL: "",
+      sstorageURL: "",
+      providerId: "email",
+      uid: "$uid",
+      userId: "$userId",
+      phoneNumber: "+66865001236",
+      failure: "",
+      receiver: "TMN"
     }
   ];
 }

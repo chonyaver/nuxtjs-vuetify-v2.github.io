@@ -9,7 +9,7 @@
       align="center"
       class="px-1 py-2"
     >
-      <v-card light elevation="0">
+      <v-card light elevation="0" color="transparent">
         <v-card-text class="transparent" style="height: 46px"></v-card-text>
         <v-card-title class="large t-light">
           <v-spacer />
@@ -19,7 +19,7 @@
           >
           <v-spacer />
         </v-card-title>
-        <v-card-text v-if="flow1 === true">
+        <v-card-text v-if="flow1 === true" class="py-2 align-center">
           <v-spacer />
           <v-card
             light
@@ -115,8 +115,8 @@
             </v-card-text>
           </v-card>
           <v-spacer />
-          <div style="position: absolute; left: 2px; bottom: 2px;">
-            <v-img src="#" width="auto" height="100px"></v-img>
+          <div style="position: absolute; left: 2px; top: 37%;">
+            <v-img :src="image1" max-width="120px" max-height="80px"></v-img>
           </div>
         </v-card-text>
         <v-card-text
@@ -128,43 +128,49 @@
           <v-card
             light
             elevation="0"
-            class="transparent mt-0 pa-1 mx-auto"
+            color="transparent"
+            class="mt-0 pa-1 mx-auto"
             max-width="400px"
           >
-            <v-card-text class="transparent">
-              <v-container>
+            <v-card-text class="transparent px-1 pt-0" align="center">
+              <v-container fluid>
                 <v-row align="center" justify="center">
-                  <v-col v-for="sItem in sItems" :key="sItem.id" cols="6">
+                  <v-col
+                    v-for="sItem in sItems"
+                    :key="sItem.id"
+                    cols="6"
+                    class="pa-1"
+                  >
                     <v-sheet
+                      :tile="sItem.title"
                       :class="sItem.classes"
+                      height="auto"
                       max-height="180px"
-                      elevation="12"
-                      :title="sItem.title"
+                      elevation="4"
                       light
                       @click="openSDialog(sItem)"
                     >
                       <v-img
                         :src="sItem.src"
-                        :alt="sItem.title"
-                        class="ma-1 bd-4"
+                        class="bd-4"
                         sizes="auto"
                         aspect-ratio="1.7778"
                       ></v-img>
                     </v-sheet>
                   </v-col>
-                  <v-col cols="6">
+                  <v-col cols="6" class="pa-1">
                     <v-sheet
-                      class="pa-1 bd-4 bd-pink4 pointer"
-                      max-height="180px"
-                      elevation="16"
                       title="กลับเมนูหลัก"
+                      class="pa-1 bd-4 bd-pink4 pointer"
+                      height="auto"
+                      max-height="180px"
+                      elevation="4"
                       light
                       @click="closeFlow2()"
                     >
                       <v-img
-                        src="~/src/assets/images/btn1.svg"
-                        alt="Back"
-                        class="ma-1 bd-4"
+                        :src="flowSrc"
+                        class="bd-4"
                         sizes="auto"
                         aspect-ratio="1.7778"
                       ></v-img>
@@ -189,50 +195,45 @@
             class="mt-0 pa-1 mx-auto"
             max-width="400px"
           >
-            <v-card-text class="transparent pa-1" align="center">
+            <v-card-text class="transparent px-1 pt-0" align="center">
               <v-container fluid>
                 <v-row align="center" justify="center">
-                  <v-col v-for="bItem in bItems" :key="bItem.id" cols="6">
+                  <v-col
+                    v-for="bItem in bItems"
+                    :key="bItem.id"
+                    cols="6"
+                    class="pa-1"
+                  >
                     <v-sheet
-                      color="transparent"
+                      :title="bItem.title"
                       :class="bItem.classes"
+                      height="auto"
                       max-height="180px"
-                      elevation="18"
+                      elevation="4"
                       light
                       @click="openBDialog(bItem)"
                     >
-                      <v-icon
-                        v-if="bItem.src.startsWith('mdi')"
-                        :color="bItem.color"
-                        class="mx-auto mt-auto mb-1"
-                        large
-                      >
-                        {{ bItem.src }}
-                      </v-icon>
                       <v-img
-                        v-else-if="!bItem.src.startsWith('mdi')"
                         :src="bItem.src"
-                        class="flex mx-auto mt-auto mb-1"
+                        class="bd-4"
                         sizes="auto"
-                        max-height="28px"
+                        aspect-ratio="1.7778"
                       ></v-img>
-                      <br />
-                      <span class="medium t-light mx-auto mb-auto mt-0">
-                        {{ bItem.title }}
-                      </span>
                     </v-sheet>
                   </v-col>
-                  <v-col cols="6">
+                  <v-col cols="6" class="pa-1">
                     <v-sheet
+                      title="กลับเมนูหลัก"
                       class="pa-1 bd-4 bd-pink4 pointer"
+                      height="auto"
                       max-height="180px"
-                      elevation="18"
+                      elevation="4"
                       light
                       @click="closeFlow3()"
                     >
                       <v-img
                         :src="flowSrc"
-                        class="ma-1 bd-4"
+                        class="bd-4"
                         sizes="auto"
                         aspect-ratio="1.7778"
                       ></v-img>
@@ -252,7 +253,6 @@
       <v-dialog
         v-model="sDialog"
         max-width="460px"
-        class="align-center bg-dialog1"
         v-click-outside="closeSDialog"
       >
         <v-card
@@ -262,13 +262,16 @@
           width="auto"
         >
           <v-card-text align="center" class="dark3 align-center pa-0">
-            <v-card class="transparent pa-2" elevation="0">
-              <v-card-title class="transparent large align-center t-white">
+            <v-card class="transparent pa-1" elevation="0">
+              <v-card-title class="transparent large align-center t-white py-1">
                 <v-spacer />
                 {{ dSub }}
                 <v-spacer />
               </v-card-title>
-              <v-card-text align="center" class="transparent align-center">
+              <v-card-text
+                align="center"
+                class="transparent align-center pt-0 pb-1"
+              >
                 <v-container fluid>
                   <v-row
                     v-for="sellItem in sellItems"
@@ -309,14 +312,17 @@
                       align="center"
                       class="d-inline-flex flex flex-nowrap align-center justify-center text-center py-1 px-1 bg-white bd-4"
                     >
-                      <span :id="sellItem.id" class="flex my-1 medium t-light">
+                      <span
+                        :id="sellItem.id"
+                        class="flex my-auto medium t-light"
+                      >
                         {{ sellItem.data }}
                       </span>
                       <v-btn
                         v-if="sellItem.id === '2' || sellItem.id === '4'"
                         title="คัดลอก"
                         :color="color"
-                        class="flex my-1 ml-1"
+                        class="flex my-auto ml-1"
                         dark
                         icon
                         x-small
@@ -341,7 +347,10 @@
                   </v-row>
                 </v-container>
               </v-card-text>
-              <v-card-actions align="center" class="transparent align-center">
+              <v-card-actions
+                align="center"
+                class="transparent align-center pt-0 pb-1"
+              >
                 <v-spacer />
                 <v-btn
                   color="black"
@@ -362,7 +371,6 @@
       <v-dialog
         v-model="bDialog"
         max-width="460px"
-        class="align-center bg-dialog1"
         v-click-outside="closeBDialog"
       >
         <v-card
@@ -372,13 +380,16 @@
           width="auto"
         >
           <v-card-text align="center" class="dark3 align-center pa-0">
-            <v-card class="transparent pa-2" elevation="0">
-              <v-card-title class="transparent large align-center t-white">
+            <v-card class="transparent pa-1" elevation="0">
+              <v-card-title class="transparent large align-center t-white py-1">
                 <v-spacer />
                 {{ dSub2 }}
                 <v-spacer />
               </v-card-title>
-              <v-card-text align="center" class="transparent align-center">
+              <v-card-text
+                align="center"
+                class="transparent align-center pt-0 pb-1"
+              >
                 <v-container fluid>
                   <v-row
                     v-for="buyItem in buyItems"
@@ -419,7 +430,10 @@
                       align="center"
                       class="d-inline-flex flex flex-nowrap align-center justify-center text-center py-1 px-1 bg-white bd-4"
                     >
-                      <span :id="buyItem.id" class="flex my-1 medium t-light">
+                      <span
+                        :id="buyItem.id"
+                        class="flex my-auto medium t-light"
+                      >
                         {{ buyItem.data }}
                       </span>
                       <v-btn
@@ -430,7 +444,7 @@
                         "
                         title="คัดลอก"
                         :color="color2"
-                        class="flex my-1 ml-1"
+                        class="flex my-auto ml-1 mr-auto"
                         dark
                         icon
                         x-small
@@ -455,11 +469,14 @@
                   </v-row>
                 </v-container>
               </v-card-text>
-              <v-card-actions align="center" class="transparent align-center">
+              <v-card-actions
+                align="center"
+                class="transparent align-center py-0"
+              >
                 <v-spacer />
                 <v-btn
                   color="black"
-                  class="medium t-white mx-auto"
+                  class="medium t-white mx-auto my-1"
                   dark
                   rounded
                   small
@@ -534,8 +551,10 @@ export default {
           classes: "align-center text-center justify-center"
         }
       ],
-      flow1Src:
+      flowSrc:
         "https://res.cloudinary.com/dckrvb0rw/image/upload/v1691754088/public/web/btn1_jzydte.svg",
+      image1:
+        "https://res.cloudinary.com/dckrvb0rw/image/upload/v1690787839/public/web/Paridad-dolar-euro-transformed0-2_wbx1a9.png",
       sellItems: [],
       buyItems: [],
       errSnack: false,
