@@ -1,10 +1,10 @@
 const ignorePaths = ["\u002F__webpack_hmr","\u002F_loading","\u002F_nuxt\u002F"]
 
 importScripts(
-  'https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js'
+  'https://www.gstatic.com/firebasejs/10.2.0/firebase-app-compat.js'
 )
 importScripts(
-  'https://www.gstatic.com/firebasejs/10.1.0/firebase-auth-compat.js'
+  'https://www.gstatic.com/firebasejs/10.2.0/firebase-auth-compat.js'
 )
 firebase.initializeApp({"apiKey":"AIzaSyBWyGmvmbokmWq_ppLymzMFrAa6Wcdn4y4","authDomain":"metang.firebaseapp.com","databaseURL":"https:\u002F\u002Fmetang-default-rtdb.asia-southeast1.firebasedatabase.app","projectId":"metang","storageBucket":"metang.appspot.com","messagingSenderId":"604286043584","appId":"1:604286043584:web:a4def1c3a2ed235e05f425","measurementId":"G-MWR3Z63EPX"})
 

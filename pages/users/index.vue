@@ -26,8 +26,8 @@
           >
             <v-card-text class="align-start pa-1">
               <v-container fluid>
-                <v-row align="center" justify="center">
-                  <v-col cols="12" class="d-inline-flex flex flex-nowrap align-center justify-center text-center px-2 py-1 mb-2">
+                <v-row align="center" justify="center" class="mb-3">
+                  <v-col cols="12" class="d-inline-flex flex flex-nowrap align-center justify-center text-center px-2 py-1 mb-4">
                     <span class="ml-auto mr-1 medium">
                       สถานะ&colon;
                     </span>
@@ -69,7 +69,7 @@
                       color="transparent"
                       class="d-block align-center justify-center text-center pa-sm-3 pa-md-4 pa-lg-5 pa-xl-6 pointer"
                       height="auto"
-                      max-height="200px"
+                      max-height="180px"
                       elevation="0"
                       light
                       @click="$router.push(item.link)"
@@ -94,7 +94,7 @@
                       color="transparent"
                       class="d-block align-center justify-center text-center pa-sm-3 pa-md-4 pa-lg-5 pa-xl-6 pointer"
                       height="auto"
-                      max-height="200px"
+                      max-height="180px"
                       elevation="0"
                       light
                       @click="$router.push(item.link)"
@@ -109,17 +109,41 @@
                     </v-sheet>
                   </v-col>
                 </v-row>
-                <v-row v-if="user.createdFrom === 'email'" align="center" justify="start">
+                <v-row align="center" justify="start" class="mb-3">
                   <v-col
                     cols="6"
-                    class="align-center justify-center text-center bd-rt mr-auto"
                     align="center"
+                    class="align-center justify-center text-center bd-rt"
                   >
                     <v-sheet
                       color="transparent"
                       class="d-block align-center justify-center text-center pa-sm-3 pa-md-4 pa-lg-5 pa-xl-6 pointer"
                       height="auto"
-                      max-height="200px"
+                      max-height="180px"
+                      elevation="0"
+                      light
+                      @click="$router.push('/policies')"
+                    >
+                      <v-icon large class="mx-auto mb-1 t-light">
+                        mdi-note
+                      </v-icon>
+                      <br>
+                      <span class="mx-auto t-light">
+                        นโยบายข้อกำหนด
+                      </span>
+                    </v-sheet>
+                  </v-col>
+                  <v-col
+                    v-if="user.createdFrom === 'email'"
+                    cols="6"
+                    align="center"
+                    class="align-center justify-center text-center"
+                  >
+                    <v-sheet
+                      color="transparent"
+                      class="d-block align-center justify-center text-center pa-sm-3 pa-md-4 pa-lg-5 pa-xl-6 pointer"
+                      height="auto"
+                      max-height="180px"
                       elevation="0"
                       light
                       @click="$router.push('/update-password')"
@@ -135,10 +159,10 @@
                   </v-col>
                 </v-row>
                 <v-row justify="center">
-                  <v-col cols="12" class="align-center justify-center text-center px-2 pb-2 pt-3">
+                  <v-col cols="12" class="align-end justify-center text-center px-2 pb-2 pt-3">
                     <v-btn
                       color="black"
-                      class="mt-1 mb-0 mx-1 medium"
+                      class="mt-3 mb-0 mx-1 medium"
                       dark
                       block
                       rounded
@@ -199,7 +223,7 @@ export default {
         { id: '1', title: 'บัญชีของฉัน', classes: 'align-center justify-center text-center bd-rb', icon: 'mdi-account', link: '/account' },
         { id: '2', title: 'ธนาคาร', classes: 'align-center justify-center text-center bd-b', icon: 'mdi-bank', link: '/bank' },
         { id: '3', title: 'ข้อความ', classes: 'align-center justify-center text-center bd-r', icon: 'mdi-inbox', link: '/messages' },
-        { id: '4', title: 'ความเป็นส่วนตัว', classes: this.uClasses, icon: 'mdi-cog', link: '/privacy' }
+        { id: '4', title: 'ความเป็นส่วนตัว', classes: 'align-center justify-center text-center bd-b', icon: 'mdi-cog', link: '/privacy' }
       ],
       user: {},
       errSnack: false,
@@ -215,17 +239,6 @@ export default {
         { rel: 'favicon', type: 'image/x-icon', href: '/favicon.ico' }
       ]
     };
-  },
-  
-  computed: {
-    uClasses () {
-      const user = this.user;
-      if (user.createdFrom === 'email') {
-        return 'align-center justify-center text-center bd-b';
-      } else {
-        return 'align-center justify-center text-center';
-      }
-    }
   },
 
   mounted () {

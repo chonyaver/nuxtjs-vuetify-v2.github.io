@@ -2,7 +2,7 @@ export function userData() {
   return {
     uid: "$uid",
     userId: "user_id",
-    tags: "unverified",
+    tags: "verified",
     group: "member",
     date: Date.now(),
     linkLine: true,
@@ -26,12 +26,12 @@ export function userData() {
       socials: [
         {
           id: "so01",
-          socialName: "PromptPay",
+          socialName: "PROMPT",
           social: "0865001236"
         },
         {
           id: "so02",
-          socialName: "FacebookPay",
+          socialName: "FBPAY",
           social: "chonthicha.noon@gmail.com"
         }
       ]
