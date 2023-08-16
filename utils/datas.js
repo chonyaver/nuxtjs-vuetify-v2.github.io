@@ -2,7 +2,7 @@ export function userData() {
   return {
     uid: "$uid",
     userId: "user_id",
-    tags: "verified",
+    tags: "unverified",
     group: "member",
     date: Date.now(),
     linkLine: true,

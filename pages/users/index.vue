@@ -199,7 +199,7 @@ export default {
         { id: '1', title: 'บัญชีของฉัน', classes: 'align-center justify-center text-center bd-rb', icon: 'mdi-account', link: '/account' },
         { id: '2', title: 'ธนาคาร', classes: 'align-center justify-center text-center bd-b', icon: 'mdi-bank', link: '/bank' },
         { id: '3', title: 'ข้อความ', classes: 'align-center justify-center text-center bd-r', icon: 'mdi-inbox', link: '/messages' },
-        { id: '4', title: 'ความเป็นส่วนตัว', classes: (this.user.createdFrom === 'email' ? 'align-center justify-center text-center bd-b' : 'align-center justify-center text-center'), icon: 'mdi-cog', link: '/privacy' }
+        { id: '4', title: 'ความเป็นส่วนตัว', classes: this.uClasses, icon: 'mdi-cog', link: '/privacy' }
       ],
       user: {},
       errSnack: false,
@@ -218,9 +218,13 @@ export default {
   },
   
   computed: {
-    classes () {
-      const user = this
-      if
+    uClasses () {
+      const user = this.user;
+      if (user.createdFrom === 'email') {
+        return 'align-center justify-center text-center bd-b';
+      } else {
+        return 'align-center justify-center text-center';
+      }
     }
   },
 
@@ -252,6 +256,10 @@ export default {
   methods: {
     refresh () {
       this.$nuxt.refresh();
+    }
+  }
+};
+</script>
     }
   }
 };
