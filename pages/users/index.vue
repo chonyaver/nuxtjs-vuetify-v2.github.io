@@ -16,48 +16,44 @@
           ศูนย์สมาชิก
           <v-spacer />
         </v-card-title>
-        <v-card-text align="center" class="align-center py-2">
+        <v-card-text class="align-center py-2">
           <v-spacer />
           <v-card
             light
             elevation="0"
-            class="mx-auto mt-0 pa-1 bg10-2"
+            class="mx-auto mt-0 pa-2 bg10-2"
             max-width="440px"
           >
-            <v-card-text align="center" class="align-start px-1 pt-0">
+            <v-card-text class="align-start pa-1">
               <v-container fluid>
-                <v-row align="start" justify="center">
-                  <v-col cols="12" align="center" class="align-start">
-                    <v-toolbar light color="transparent" elevation="0" dense class="mt-0 mb-2">
-                      <v-spacer />
-                      <v-toolbar-title class="mr-0 ml-auto medium">
-                        สถานะ&colon;
-                      </v-toolbar-title>
-                      <v-btn
-                        :color="uColor"
-                        class="mr-1 medium pointer"
-                        dark
-                        text
-                        x-small
-                        nuxt
-                        :to="uLink"
-                      >
-                        {{ uText }}
-                      </v-btn>
-                      <v-btn
-                        color="blue darken-1"
-                        class="mr-auto ml-0 medium pointer"
-                        dark
-                        icon
-                        x-small
-                        @click="refresh()"
-                      >
-                        <v-icon>
-                          mdi-refresh
-                        </v-icon>
-                      </v-btn>
-                      <v-spacer />
-                    </v-toolbar>
+                <v-row align="center" justify="center">
+                  <v-col cols="12" class="d-inline-flex flex flex-nowrap align-center justify-center text-center px-2 py-1 mb-2">
+                    <span class="ml-auto mr-1 medium">
+                      สถานะ&colon;
+                    </span>
+                    <v-btn
+                      :color="uColor"
+                      class="ml-0 mr-1 medium pointer"
+                      dark
+                      text
+                      x-small
+                      nuxt
+                      :to="uLink"
+                    >
+                      {{ uText }}
+                    </v-btn>
+                    <v-btn
+                      color="blue darken-1"
+                      class="mr-auto ml-1 medium pointer"
+                      dark
+                      icon
+                      x-small
+                      @click="refresh()"
+                    >
+                      <v-icon>
+                        mdi-refresh
+                      </v-icon>
+                    </v-btn>
                   </v-col>
                 </v-row>
                 <v-row align="center" justify="center">
@@ -112,10 +108,11 @@
                       </span>
                     </v-sheet>
                   </v-col>
+                </v-row>
+                <v-row v-if="user.createdFrom === 'email'" align="center" justify="start">
                   <v-col
-                    v-if="user.createdFrom === 'email'"
                     cols="6"
-                    class="align-center justify-center text-center bd-rt"
+                    class="align-center justify-center text-center bd-rt mr-auto"
                     align="center"
                   >
                     <v-sheet
@@ -135,6 +132,26 @@
                         เปลี่ยนรหัสผ่าน
                       </span>
                     </v-sheet>
+                  </v-col>
+                </v-row>
+                <v-row justify="center">
+                  <v-col cols="12" class="align-center justify-center text-center px-2 pb-2 pt-3">
+                    <v-btn
+                      color="black"
+                      class="mt-1 mb-0 mx-1 medium"
+                      dark
+                      block
+                      rounded
+                      link
+                      @click="logout()"
+                    >
+                      <v-icon small>
+                        mdi-logout
+                      </v-icon>
+                      <span class="medium">
+                        ออกจากระบบ
+                      </span>
+                    </v-btn>
                   </v-col>
                 </v-row>
               </v-container>
@@ -182,7 +199,7 @@ export default {
         { id: '1', title: 'บัญชีของฉัน', classes: 'align-center justify-center text-center bd-rb', icon: 'mdi-account', link: '/account' },
         { id: '2', title: 'ธนาคาร', classes: 'align-center justify-center text-center bd-b', icon: 'mdi-bank', link: '/bank' },
         { id: '3', title: 'ข้อความ', classes: 'align-center justify-center text-center bd-r', icon: 'mdi-inbox', link: '/messages' },
-        { id: '4', title: 'ความเป็นส่วนตัว', classes: 'align-center justify-center text-center', icon: 'mdi-cog', link: '/privacy' }
+        { id: '4', title: 'ความเป็นส่วนตัว', classes: (this.user.createdFrom === 'email' ? 'align-center justify-center text-center bd-b' : 'align-center justify-center text-center'), icon: 'mdi-cog', link: '/privacy' }
       ],
       user: {},
       errSnack: false,
@@ -198,6 +215,13 @@ export default {
         { rel: 'favicon', type: 'image/x-icon', href: '/favicon.ico' }
       ]
     };
+  },
+  
+  computed: {
+    classes () {
+      const user = this
+      if
+    }
   },
 
   mounted () {
