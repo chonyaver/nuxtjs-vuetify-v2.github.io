@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <v-content class="bg-animate3">
+    <v-main class="bg-animate3">
       <v-container fluid>
         <Nuxt />
       </v-container>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 
@@ -433,6 +433,12 @@ v-file-input:below-level {
   letter-spacing: 0.0178571429em;
 }
 
+.x-small {
+  font-family: "Roboto", "monospace";
+  font-weight: bolder;
+  font-size: 0.567rem !important;
+}
+
 .small {
   font-family: "Roboto", sans-serif;
   font-size: 10px;
@@ -465,6 +471,16 @@ v-file-input:below-level {
   font-size: 0.9rem;
   letter-spacing: 0.0175em;
   font-weight: 400;
+}
+
+.t-table {
+  font-family: "Droid Sans", "monospace";
+  font-size: 0.7555rem !important;
+  font-weight: bolder;
+  letter-spacing: 0.0178571429em;
+  word-spacing: 1px;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 .t-white {
@@ -669,16 +685,49 @@ v-file-input:below-level {
   border-left: 1px double #f700b6 !important;
 }
 
+.grad-pp {
+  background-size: 100% 100%;
+  background: radial-gradient(#0072b5, #001925);
+}
+
+.grad-wm {
+  background-size: 100% 100%;
+  background: radial-gradient(#34568b, #011138);
+}
+
+.grad-pm {
+  background-size: 100% 100%;
+  background: radial-gradient(#dd2512, #910231);
+}
+
+.grad-nt {
+  background-size: 100% 100%;
+  background: radial-gradient(#008000, #0b3e01);
+}
+
+.grad-sk {
+  background-size: 100% 100%;
+  background: radial-gradient(#d2386c, #81134d);
+}
+
 @media screen and (max-width: 900px) {
   *,
   .medium {
     font-size: 85%;
+  }
+
+  .t-table {
+    font-size: 83.5%;
   }
 }
 
 @media screen and (max-width: 600px) {
   *,
   .medium {
+    font-size: 75%;
+  }
+
+  .t-table {
     font-size: 75%;
   }
 }

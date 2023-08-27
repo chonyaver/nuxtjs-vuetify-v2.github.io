@@ -160,11 +160,19 @@ v-file-input:below-level {
   .medium {
     font-size: 85%;
   }
+
+  .t-table {
+    font-size: 83.5%;
+  }
 }
 
 @media screen and (max-width: 600px) {
   *,
   .medium {
+    font-size: 75%;
+  }
+
+  .t-table {
     font-size: 75%;
   }
 }

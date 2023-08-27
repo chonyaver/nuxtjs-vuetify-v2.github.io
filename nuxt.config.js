@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 require("dotenv").config();
 
 module.exports = {
@@ -71,19 +72,17 @@ module.exports = {
    ** Plugins to load before mounting the App
    ** Doc: https://nuxtjs.org/guide/plugins
    */
-  plugins: [
-    { src: "~/plugins/axios.js" },
-    { src: "~/plugins/firebase-init.js", mode: "client" }
-  ],
+  plugins: [{ src: "~/plugins/axios.js" }],
 
   components: true,
+
+  buildModules: ["@nuxtjs/vuetify"],
 
   /*
    ** Nuxt.js modules
    ** Doc: https://nuxtjs.org/guide/modules
    */
   modules: [
-    "@nuxtjs/vuetify",
     // TODO: Remove it if you want to eject from codeSandbox
     "./codesandbox",
     ["cookie-universal-nuxt", { parseJSON: true, fromRes: true }],
@@ -110,7 +109,7 @@ module.exports = {
     services: {
       auth: {
         persistence: "none",
-        ssr: "~/service-account.json",
+        ssr: false,
         ignorePaths: ["/api"]
       },
       database: true,
@@ -136,7 +135,7 @@ module.exports = {
 
   // Doc: https://github.com/nuxt-community/vuetify-module
   vuetify: {
-    customVariables: ["~/assets/variables.scss"],
+    customVariables: ["./assets/variables.scss"],
     optionsPath: "./vuetify.options.js"
   },
 
@@ -151,7 +150,10 @@ module.exports = {
     middleware: ["ssr-cookie"]
   },
 
+  buildDir: ".nuxt",
+
   build: {
-    buildDir: ".nuxt"
+    extractCss: true,
+    extend(config, ctx) {}
   }
 };

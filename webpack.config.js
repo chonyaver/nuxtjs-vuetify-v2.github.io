@@ -28,7 +28,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(webm|mp4|ogv|svg)$/i,
+        test: /\.(webm|mp4|ogv)$/i,
         use: [
           {
             loader: "file-loader",

@@ -15,7 +15,6 @@
     "@nuxtjs/axios": "latest",
     "@nuxtjs/dotenv": "latest",
     "@nuxtjs/firebase": "^8.2.2",
-    "@nuxtjs/vuetify": "1.8.3",
     "body-parser": "latest",
     "cookie": "latest",
     "cookie-parser": "latest",
@@ -26,15 +25,20 @@
     "express-session": "latest",
     "firebase": "latest",
     "firebase-admin": "latest",
-    "jwt-decode": "^3.1.2s",
+    "jwt-decode": "^3.1.2",
     "nuxt": "2.9.2",
     "reqlim": "0.0.0",
     "util": "latest"
   },
   "devDependencies": {
+    "@nuxtjs/vuetify": "^1.8.3",
+    "@nuxtjs/eslint-config": "latest",
+    "@nuxtjs/eslint-module": "latest",
     "eslint": "latest",
     "eslint-plugin-import": "latest",
-    "eslint-plugin-json": "latest"
+    "eslint-plugin-json": "latest",
+    "eslint-plugin-nuxt": "latest",
+    "eslint-plugin-vue": "latest"
   },
   "keywords": []
 }

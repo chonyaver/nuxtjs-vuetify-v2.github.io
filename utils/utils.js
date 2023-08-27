@@ -20,6 +20,37 @@ export function multiply(a, b) {
   return a * b;
 }
 
+export function getTax(amount, rate, tax) {
+  let ta;
+  const ar = amount * rate;
+  const t = ar * tax;
+  ta = t / 100;
+  return ta;
+}
+
+/**
+ *
+ * @param {String} type
+ * @param {Number} amount
+ * @param {Number} rate
+ * @param {Number} tax
+ * @param {Number} fee
+ *
+ * @return {Number}
+ */
+export function getTotal(type, amount, rate, tax, fee) {
+  const ar = amount * rate;
+  const t = ar * tax;
+  const ta = t / 100;
+  if (type === "sell") {
+    const f = ar - ta;
+    return f - fee;
+  } else if (type === "buy") {
+    const fb = ar + ta;
+    return fb + fee;
+  }
+}
+
 /**
  * แสดงข้อความ 4 ตัวอักษรสุดท้าย
  * @param {String} str

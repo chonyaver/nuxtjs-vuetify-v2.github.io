@@ -7,17 +7,17 @@
     "es6": true
   },
   "parserOptions": {
-    "ecmaVersion": 2015
+    "ecmaVersion": "latest"
   },
   "noInlineConfig": false,
   "globals": {
     "importScripts": true
   },
-  "plugins": ["import", "json"],
+  "plugins": ["import", "json", "nuxt", "vue"],
   "rules": {
     "quote-props": "off",
     "quotes": ["warn", "single"],
-    "semi": ["error", "always"],
+    "semi": "off",
     "no-undef": "warn",
     "no-console": "off",
     "no-unused-vars": "warn",

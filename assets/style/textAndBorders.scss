@@ -10,6 +10,12 @@
   letter-spacing: 0.0178571429em;
 }
 
+.x-small {
+  font-family: "Roboto", "monospace";
+  font-weight: bolder;
+  font-size: 0.567rem !important;
+}
+
 .small {
   font-family: "Roboto", sans-serif;
   font-size: 10px;
@@ -42,6 +48,16 @@
   font-size: 0.9rem;
   letter-spacing: 0.0175em;
   font-weight: 400;
+}
+
+.t-table {
+  font-family: "Droid Sans", "monospace";
+  font-size: 0.7555rem !important;
+  font-weight: bolder;
+  letter-spacing: 0.0178571429em;
+  word-spacing: 1px;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 .t-white {
