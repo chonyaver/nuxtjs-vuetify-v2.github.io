@@ -386,6 +386,8 @@
 @font-face {
   src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
   font-family: "Roboto", "sans-serif";
+  -moz-font-feature-settings: normal;
+  -webkit-font-feature-settings: normal;
 }
 
 /* Globals */
@@ -404,8 +406,11 @@ template {
   letter-spacing: 0.0178571429em;
   word-spacing: normal;
   word-wrap: break-word;
-  font-size-adjust: 100%;
+  font-size-adjust: none;
   line-height: 1.5;
+  font-feature-settings: normal;
+  -moz-font-feature-settings: normal;
+  -webkit-font-feature-settings: normal;
 }
 
 *[dark],
@@ -863,6 +868,12 @@ v-file-input:below-level {
 
 .t-light {
   color: #655d62 !important;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.t-light2 {
+  color: #777777 !important;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: subpixel-antialiased;
 }

@@ -1,6 +1,8 @@
 @font-face {
   src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
   font-family: "Roboto", sans-serif;
+  -moz-font-feature-settings: normal;
+  -webkit-font-feature-settings: normal;
 }
 /* Colors */
 $pink1: #e002a5;
@@ -35,14 +37,17 @@ html {
 html,
 body,
 template {
+  line-height: 1.5;
   font-family: "Roboto", sans-serif;
   font-size: 0.875rem;
   font-weight: 300;
   letter-spacing: 0.0178571429em;
   word-spacing: normal;
   word-wrap: break-word;
-  font-size-adjust: 100%;
-  line-height: 1.5;
+  font-size-adjust: none;
+  font-feature-settings: normal;
+  -moz-font-feature-settings: normal;
+  -webkit-font-feature-settings: normal;
 }
 
 *[dark],

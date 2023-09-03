@@ -35,6 +35,7 @@
                         v-for="sHeader in sHeaders"
                         :key="sHeader.id"
                         :colspan="sHeader.flex"
+                        class="transparent"
                       >
                         <v-btn
                           color="lightgrey"
@@ -42,7 +43,7 @@
                           outlined
                           block
                         >
-                          {{ sHeader.flex }}
+                          {{ sHeader.text }}
                         </v-btn>
                       </th>
                     </tr>
@@ -51,7 +52,7 @@
                       :key="sellItem.id"
                       class="transparent"
                     >
-                      <td colspan="2">
+                      <td colspan="2" class="transparent">
                         <v-btn
                           color="lightgrey"
                           class="rounded-r-0 py-2 pr-1 my-1 ml-1 text-end bg-white t-table pointer"
@@ -63,7 +64,7 @@
                           &dollar;{{ sellItem.min }} &minus; &dollar;{{ sellItem.max }}
                         </v-btn>
                       </td>
-                      <td>
+                      <td class="transparent">
                         <v-btn
                           color="lightgrey"
                           class="rounded-0 py-2 px-1 my-1 text-center bg-white t-table"
@@ -73,7 +74,7 @@
                           &colon;
                         </v-btn>
                       </td>
-                      <td>
+                      <td class="transparent">
                         <v-btn
                           color="lightgrey"
                           class="rounded-0 py-2 px-1 my-1 text-center bg-white t-table"
@@ -84,7 +85,7 @@
                           ฿ {{ getDecimal(sellItem.rate) }}
                         </v-btn>
                       </td>
-                      <td>
+                      <td class="transparent">
                         <v-btn
                           color="lightgrey"
                           class="rounded-0 py-2 px-1 my-1 text-center bg-white t-table"
@@ -94,7 +95,7 @@
                           &colon;
                         </v-btn>
                       </td>
-                      <td>
+                      <td class="transparent">
                         <v-btn
                           color="lightgrey"
                           class="rounded-l-0 py-2 px-1 my-1 mr-1 text-center bg-white t-table"
@@ -111,7 +112,6 @@
                     <v-spacer />
                     <v-btn
                       title="แจ้งโอน"
-                      color="transparent"
                       :class="btnClass"
                       dark
                       rounded
@@ -123,7 +123,6 @@
                     <v-spacer />
                     <v-btn
                       title="คำณวนอัตราแลกเปลี่ยน"
-                      color="transparent"
                       :class="btnClass"
                       dark
                       rounded
@@ -143,7 +142,7 @@
                 <v-card
                   light
                   color="transparent"
-                  class="grad7 pa-2 mx-auto"
+                  class="grad7 pa-2 mx-auto mt-sm-3 mmt-md-3"
                   elevation="16"
                   max-width="400px"
                   rounded
@@ -164,7 +163,7 @@
                           outlined
                           block
                         >
-                          {{ sHeader.flex }}
+                          {{ sHeader.text }}
                         </v-btn>
                       </th>
                     </tr>
@@ -277,19 +276,19 @@
               อัตราแลกเปลี่ยม ภาษีที่หักเก็บ และ ค่าทำเนียม โดยจะแสดงไว้บนหน้านี้เป็นหลัก
             </v-card-text>
             <v-card-text class="bg-white pa-2 justify-center text-center align-baseline">
-              <small v-if="$route.params.id === 'currency01'" class="small t-light2">
+              <small v-if="path === 'currency01'" class="small t-light2">
                 &starf; Paypal คือชื่อแบรนด์ Paypal เป็นลิขสิทธิ์ของ Paypal
               </small>
-              <small v-else-if="$route.params.id === 'currency02'" class="small t-light2">
+              <small v-else-if="path === 'currency02'" class="small t-light2">
                 &starf; Web Money คือชื่อแบรนด์ Web Money เป็นลิขสิทธิ์ของ Web Money
               </small>
-              <small v-else-if="$route.params.id === 'currency03'" class="small t-light2">
+              <small v-else-if="path === 'currency03'" class="small t-light2">
                 &starf; Perfect Money คือชื่อแบรนด์ Perfect Money เป็นลิขสิทธิ์ของ Perfect Money
               </small>
-              <small v-else-if="$route.params.id === 'currency04'" class="small t-light2">
+              <small v-else-if="path === 'currency04'" class="small t-light2">
                 &starf; Neteller คือชื่อแบรนด์ Neteller เป็นลิขสิทธิ์ของ Neteller
               </small>
-              <small v-else-if="$route.params.id === 'currency05'" class="small t-light2">
+              <small v-else-if="path === 'currency05'" class="small t-light2">
                 &starf; Skrill คือชื่อแบรนด์ Skrill เป็นลิขสิทธิ์ของ Skrill
               </small>
             </v-card-text>
@@ -304,12 +303,12 @@
 </template>
 
 <script>
-import CustomHeader from '~/components/CustomHeader.vue';
-import { getDecimal } from '~/utils/utils';
-import { getNtBuys, getNtSells, getPmBuys, getPmSells, getPpBuys, getPpSells, getSkBuys, getSkSells, getWmBuys, getWmSells } from '~/utils/currencies';
+import CustomHeader from '../components/CustomHeader.vue';
+import { getDecimal } from '../utils/utils';
+import { getNtBuys, getNtSells, getPmBuys, getPmSells, getPpBuys, getPpSells, getSkBuys, getSkSells, getWmBuys, getWmSells } from '../utils/currencies';
 
 export default {
-  name: 'CurrenciesId',
+  name: 'Currency',
 
   components: {
     CustomHeader
@@ -373,54 +372,39 @@ export default {
   },
 
   mounted () {
-    this.path = this.$route.params.id;
-
-    const id = this.$route.params.id;
-    switch (id) {
-      case 'currency01':
-        this.title = 'ดูอัตราแลกเปลี่ยน Paypal°';
-        this.sClass = 'blue-pp pa-1 mx-auto';
-        this.btnBClass ='grad-pp t-white medium';
-        this.sellItems = getPpSells();
-        this.buyItems = getPpBuys();
-        break;
-      case 'currency02':
-        this.title = 'ดูอัตราแลกเปลี่ยน Web Money°';
-        this.sClass = 'blue-wm pa-1 mx-auto';
-        this.btnBClass ='grad-wm t-white medium';
-        this.sellItems = getWmSells();
-        this.buyItems = getWmBuys();
-        break;
-      case 'currency03':
-        this.title = 'ดูอัตราแลกเปลี่ยน Perfect Money°';
+    const urlencoded = new URLSearchParams(window.location.search);
+    const id = urlencoded.get('id');
+    this.path = id;
+    if (id === 'currency01') {
+      this.title = 'ดูอัตราแลกเปลี่ยน Paypal°';
+      this.sClass = 'blue-pp pa-1 mx-auto';
+      this.btnBClass ='grad-pp t-white medium';
+      this.sellItems = getPpSells();
+      this.buyItems = getPpBuys();
+    } else if (id === 'currency02') {
+      this.title = 'ดูอัตราแลกเปลี่ยน Web Money°';
+      this.sClass = 'blue-wm pa-1 mx-auto';
+      this.btnBClass ='grad-wm t-white medium';
+      this.sellItems = getWmSells();
+      this.buyItems = getWmBuys();
+    } else if (id === 'currency03') {
+      this.title = 'ดูอัตราแลกเปลี่ยน Perfect Money°';
         this.sClass = 'red-pm pa-1 mx-auto';
         this.btnBClass ='grad-pm t-white medium';
         this.sellItems = getPmSells();
         this.buyItems = getPmBuys();
-        break;
-      case 'currency04':
-        this.title = 'ดูอัตราแลกเปลี่ยน Neteller°';
+    } else if (id === 'currency04') {
+      this.title = 'ดูอัตราแลกเปลี่ยน Neteller°';
         this.sClass = 'green-nt pa-1 mx-auto';
         this.btnBClass ='grad-nt t-white medium';
         this.sellItems = getNtSells();
         this.buyItems = getNtBuys();
-        break;
-      case 'currency05':
-        this.title = 'ดูอัตราแลกเปลี่ยน Skrill°';
+    } else if (id === 'currency05') {
+      this.title = 'ดูอัตราแลกเปลี่ยน Skrill°';
         this.sClass = 'purple-sk pa-1 mx-auto';
         this.btnBClass ='grad-sk t-white medium';
         this.sellItems = getSkSells();
         this.buyItems = getSkBuys();
-        break;
-      default:
-        if (!id) {
-          this.title = '';
-          this.sClass = '';
-          this.btnBClass = '';
-          this.sellItems = [];
-          this.buyItems = [];
-        }
-        break;
     }
   },
 

@@ -40,6 +40,7 @@
                     max-height="190px"
                     elevation="6"
                     light
+                    @click="navigate(item)"
                   >
                     <v-img
                       :title="item.title"
@@ -47,30 +48,24 @@
                       class="ma-1 pointer"
                       sizes="auto"
                       aspect-ratio="1.7778"
+                    ></v-img>
+                  </v-sheet>
+                  <small
+                    class="d-inline justify-center mx-auto x-small text-center"
+                  >
+                    *{{ item.ref }}
+                    <small
+                      class="x-small t-blue-pp pointer"
                       @click="
                         $router.push({
-                          name: 'currencies-id',
-                          params: { id: item.id }
+                          name: 'policies-refers-page',
+                          params: { page: 'currencies' }
                         })
                       "
-                    ></v-img>
-                    <small
-                      class="d-inline justify-center mx-auto x-small text-center"
                     >
-                      *{{ item.ref }}
-                      <small
-                        class="x-small t-blue-pp pointer"
-                        @click="
-                          $router.push({
-                            name: 'policies-refers-page',
-                            params: { page: 'currencies' }
-                          })
-                        "
-                      >
-                        ดูอ้างอิง
-                      </small>
+                      ดูอ้างอิง
                     </small>
-                  </v-sheet>
+                  </small>
                 </v-col>
               </v-row>
             </v-container>
@@ -87,7 +82,7 @@
 </template>
 
 <script>
-import CustomFooter from "../components/CustomFooter.vue";
+import CustomFooter from "../../components/CustomFooter.vue";
 
 export default {
   name: "Currencies",
@@ -104,7 +99,8 @@ export default {
           src:
             "https://res.cloudinary.com/dckrvb0rw/image/upload/v1691752040/public/currencies/pp_jwyiyn.svg",
           title: "Paypal",
-          class: "d-block justify-center text-center align-center bd-4 bd-pp",
+          class:
+            "d-block justify-center text-center align-center bd-4 bd-pp pointer",
           ref: "ภาพที่1"
         },
         {
@@ -112,7 +108,8 @@ export default {
           src:
             "https://res.cloudinary.com/dckrvb0rw/image/upload/v1691752040/public/currencies/wm_psbngh.svg",
           title: "Web Money",
-          class: "d-block justify-center text-center align-center bd-4 bd-wm",
+          class:
+            "d-block justify-center text-center align-center bd-4 bd-wm pointer",
           ref: "ภาพที่2"
         },
         {
@@ -120,7 +117,8 @@ export default {
           src:
             "https://res.cloudinary.com/dckrvb0rw/image/upload/v1691752040/public/currencies/pm_swnyoo.svg",
           title: "Perfect Money",
-          class: "d-block justify-center text-center align-center bd-4 bd-pm",
+          class:
+            "d-block justify-center text-center align-center bd-4 bd-pm pointer",
           ref: "ภาพที่3"
         },
         {
@@ -128,7 +126,8 @@ export default {
           src:
             "https://res.cloudinary.com/dckrvb0rw/image/upload/v1691752040/public/currencies/nt_oqoe3g.svg",
           title: "Neteller",
-          class: "d-block justify-center text-center align-center bd-4 bd-nt",
+          class:
+            "d-block justify-center text-center align-center bd-4 bd-nt pointer",
           ref: "ภาพที่4"
         },
         {
@@ -136,7 +135,8 @@ export default {
           src:
             "https://res.cloudinary.com/dckrvb0rw/image/upload/v1691752040/public/currencies/sk_dkxisv.svg",
           title: "Skrill",
-          class: "d-block justify-center text-center align-center bd-4 bd-sk",
+          class:
+            "d-block justify-center text-center align-center bd-4 bd-sk pointer",
           ref: "ภาพที่5"
         }
       ]
@@ -145,7 +145,13 @@ export default {
 
   head: {
     title: "อัตราแลกเปลี่ยน",
-    link: [{ rel: "favicon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+  },
+
+  methods: {
+    navigate(item) {
+      this.$router.push(`/currency?id=${item.id}`);
+    }
   }
 };
 </script>
