@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <!-- Side menu. -->
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -33,6 +34,8 @@
             rounded
             block
             dense
+            nuxt
+            to="/login"
           >
             <v-icon color="primary">
               mdi-login
@@ -50,6 +53,7 @@
             rounded
             block
             dense
+            @click="logout()"
           >
             <v-icon color="accent">
               mdi-logout
@@ -74,171 +78,159 @@
         </div>
       </template>
     </v-navigation-drawer>
-
+    <!-- Content -->
     <v-main class="bg-white">
-      <v-container>
+      <v-container fluid>
         <Nuxt />
       </v-container>
     </v-main>
-
+    <!-- Bottom menu. -->
     <v-card
       app
       dark
-      tile
+      class="grad10 bottom pa-1"
       width="100%"
       height="auto"
-      color="primary"
-      class="top bg6 pa-1 align-center justify-center"
-      align="center"
+      elevation="15"
+      tile
     >
-      <v-app-bar
-        dark
-        color="transparent"
-        class="px-0 align-start"
-        elevation="0"
+      <v-card-actions
+        class="d-flex align-center justify-center text-center py-0 px-sm-1 px-md-2 px-lg-3 px-xl-3 transparent"
       >
+        <v-spacer />
+        <v-btn
+          v-for="bMenu in bMenus"
+          :key="bMenu.id"
+          color="transparent"
+          :class="bMenu.class"
+          :title="bMenu.title"
+          width="auto"
+          :height="$vuetify.breakpoint.smAndDown ? '57.5px' : '60px'"
+          elevation="0"
+          dark
+          link
+          router
+          :to="bMenu.route"
+        >
+          <span
+            class="d-block mx-auto pa-2 justify-center align-center text-center"
+          >
+            <v-icon
+              class="t-white mx-auto mb-1"
+              :small="$vuetify.breakpoint.smAndDown"
+            >
+              {{ bMenu.icon }}
+            </v-icon>
+            <br />
+            {{ bMenu.title }}
+            <span
+              v-if="bMenu.id === '5' && newCount > 0"
+              class="d-flex pa-1 red small white--text align-center text-center"
+              style="position: absolute; top: 3.5px; left: 51%; width: auto; height: auto; max-height: 18px; border-radius: 50%"
+            >
+              {{ newCount }}
+            </span>
+          </span>
+        </v-btn>
+        <v-spacer />
+      </v-card-actions>
+    </v-card>
+    <!-- Top menu. -->
+    <v-card
+      app
+      dark
+      class="top grad11 pa-1"
+      elevation="12"
+      width="100%"
+      height="auto"
+      tile
+    >
+      <v-app-bar dark tile dense color="transparent" elevation="0" class="pa-1">
         <v-app-bar-nav-icon
+          :small="$vuetify.breakpoint.smAndDown"
+          class="mt-0 ml-0 mb-auto mr-sm-3 mr-md-auto mr-lg-auto mr-xl-auto"
           @click.stop="drawer = !drawer"
-          x-small
-          class="ml-0 mb-auto mt-0 mr-auto"
         />
         <v-spacer />
         <v-toolbar-title
-          class="d-flex align-start my-0 mx-auto px-5 py-1 pointer"
-          @click="$router.replace('/')"
+          class="d-flex flex pa-1 mt-0 mb-1 mx-auto medium pointer"
+          style="width: auto; max-width: 165px"
         >
-          <v-spacer />
-          <v-img
-            alt="Logo"
-            :src="logo"
-            class="ma-1"
-            width="auto"
-            max-height="31px"
-          ></v-img>
-          <v-spacer />
+          <v-img alt="Logo svg" :src="logo" sizes="auto" class="ma-1"></v-img>
         </v-toolbar-title>
         <v-spacer />
-        <v-btn
-          color="transparent"
-          class="mt-0 mb-auto ml-auto mr-0"
-          text
-          router
-          to="/messages"
-          exact
-          x-small
-        >
-          <v-icon color="transparent" small>
-            mdi-inbox
-          </v-icon>
-        </v-btn>
+        <div class="mx-sm-2 mx-md-3 mx-lg-3 mx-xl-4"></div>
       </v-app-bar>
       <v-card-actions
-        class="d-flex grad9 px-1 py-2 align-center mx-2 mb-1 bd-7 bd-pink2 shadow"
-        align="center"
+        class="d-flex flex align-center justify-center text-center pa-1 mt-0 mb-1 mx-auto grad9 shadow"
       >
         <v-spacer />
         <v-btn
+          v-for="(mItem, i) in mItems"
+          :key="i"
+          :class="mItem.class"
+          :title="mItem.title"
           color="transparent"
-          elevation="0"
-          class="flex align-center text-center px-2 py-2 my-1 ml-auto mr-1 medium"
           width="auto"
-          max-height="60px"
+          :height="$vuetify.breakpoint.smAndDown ? '55px' : '60px'"
+          dark
+          depressed
           link
           router
-          to="/"
-          exact
+          :to="mItem.route"
         >
-          <span class="d-block align-center justify-center text-center ma-1">
-            <v-icon class="mb-1 t-white t-shadow">
-              mdi-home
+          <span
+            class="d-block ma-auto pa-1 justify-center align-center text-center t-white medium"
+          >
+            <v-icon
+              class="t-white mx-auto mb-1"
+              :small="$vuetify.breakpoint.smAndDown"
+            >
+              {{ mItem.icon }}
             </v-icon>
             <br />
-            <span class="medium t-white t-shadow">
-              หน้าหลัก
-            </span>
-          </span>
-        </v-btn>
-        <v-btn
-          color="transparent"
-          elevation="0"
-          class="flex align-center text-center px-sm-3 px-md-2 px-lg-3 px-xl-3 py-3 my-1 mx-1 medium"
-          width="auto"
-          max-height="60px"
-          link
-          router
-          to="/currencies"
-          exact
-        >
-          <span class="d-block align-center justify-center text-center ma-1">
-            <v-icon class="mb-1 white--text t-shadow">
-              mdi-currency-usd
-            </v-icon>
-            <br />
-            <span class="medium white--text mt-1 t-shadow">
-              อัตราแลกเปลี่ยน
-            </span>
-          </span>
-        </v-btn>
-        <v-btn
-          color="transparent"
-          elevation="0"
-          class="flex align-center text-center px-sm-3 px-md-2 px-lg-3 px-xl-3 py-3 my-1 mr-auto ml-1 text-button"
-          width="auto"
-          max-height="60px"
-          link
-          router
-          to="/guides"
-          exact
-        >
-          <span class="d-block align-center justify-center text-center ma-1">
-            <v-icon class="mb-1 white--text">
-              mdi-help-box
-            </v-icon>
-            <br />
-            <span class="text-button white--text mt-1 t-shadow">
-              วิธีซื้อขาย
-            </span>
+            {{ mItem.title }}
           </span>
         </v-btn>
         <v-spacer />
       </v-card-actions>
       <v-speed-dial
         v-model="fab"
-        fixed
-        absolute
-        dark
-        class="mr-0 mt-0 top-right-m2"
+        class="mr-0 mt-0"
         :direction="direction"
         :transition="transition"
+        absolute
+        fixed
         top
         right
       >
         <template #activator>
           <v-btn
             v-model="fab"
-            :color="fab ? 'yellow' : 'white'"
-            elevation="0"
-            class="align-center text-center medium"
+            color="transparent"
+            class="d-flex flex rounded-r-0 align-center text-center grad4 t-white t-shadow text-button"
+            max-width="58px"
+            height="44px"
             dark
-            icon
+            small
           >
             <v-icon v-if="fab">
               mdi-close
             </v-icon>
-            <v-icon v-else>
-              mdi-plus-circle
-            </v-icon>
+            <span v-else class="t-white t-shadow text-button">
+              แชท
+            </span>
           </v-btn>
         </template>
         <v-btn
           v-for="(speedItem, i) in speedItems"
           :key="i"
           :color="speedItem.color"
-          :href="speedItem.link"
-          elevation="10"
+          elevation="14"
           dark
           fab
           small
+          :href="speedItem.link"
         >
           <v-icon>
             {{ speedItem.icon }}
@@ -246,173 +238,17 @@
         </v-btn>
       </v-speed-dial>
     </v-card>
-
-    <v-card
-      app
-      class="bottom bg8 pa-1 align-center justify-center text-center"
-      dark
-      width="100%"
-      height="auto"
-      tile
-    >
-      <v-card-actions
-        class="transparent d-flex justify-center text-center align-end py-2 px-1 mx-2"
-        align="center"
-      >
-        <v-spacer />
-        <v-btn
-          v-if="IS_AUTHENTICATED"
-          color="transparent"
-          class="flex align-center text-center text-button my-1 pa-1"
-          width="auto"
-          max-height="60px"
-          elevation="0"
-          link
-          router
-          to="/login"
-          exact
-        >
-          <span class="d-block align-center justify-center text-center pa-1">
-            <v-icon class="t-white t-shadow mb-2">
-              mdi-login
-            </v-icon>
-            <br />
-            <span class="t-white t-shadow text-button">
-              เข้าสู่ระบบ
-            </span>
-          </span>
-        </v-btn>
-        <v-btn
-          v-if="IS_AUTHENTICATED"
-          color="transparent"
-          class="flex align-center text-center text-button my-1 pa-1"
-          width="auto"
-          max-height="60px"
-          elevation="0"
-          link
-          router
-          to="/register"
-          exact
-        >
-          <span class="d-block align-center justify-center text-center pa-1">
-            <v-icon class="t-white t-shadow mb-2">
-              mdi-account-plus
-            </v-icon>
-            <br />
-            <span class="t-white t-shadow text-button">
-              สมัครสมาชิก
-            </span>
-          </span>
-        </v-btn>
-        <v-btn
-          v-if="!IS_AUTHENTICATED"
-          color="transparent"
-          class="flex align-center text-center text-button my-1 pa-1"
-          width="auto"
-          max-height="60px"
-          elevation="0"
-          link
-          router
-          to="/users"
-          exact
-        >
-          <span class="d-block align-center justify-center text-center pa-1">
-            <v-icon class="t-white t-shadow mb-2">
-              mdi-account
-            </v-icon>
-            <br />
-            <span class="t-white t-shadow text-button">
-              ศูนย์สมาชิก
-            </span>
-            <span
-              v-if="newCount > 0"
-              class="d-flex pa-2 bd-50 text-center align-center red"
-              style="position: absolute; top: 3px; left: 51%; width: auto; height: auto; max-height: 18px"
-            >
-              <small class="white--text small">
-                {{ newCount }}
-              </small>
-            </span>
-          </span>
-        </v-btn>
-        <v-btn
-          color="transparent"
-          class="flex align-center text-center text-button my-1 pa-1"
-          width="auto"
-          max-height="60px"
-          elevation="0"
-          link
-          router
-          to="/new-order"
-          exact
-        >
-          <span class="d-block align-center justify-center text-center pa-1">
-            <v-icon class="t-white t-shadow mb-2">
-              mdi-hand-coin
-            </v-icon>
-            <br />
-            <span class="t-white t-shadow text-button">
-              แจ้งโอน
-            </span>
-          </span>
-        </v-btn>
-        <v-btn
-          v-if="!IS_AUTHENTICATED"
-          color="transparent"
-          class="flex align-center text-center text-button my-1 pa-1"
-          width="auto"
-          max-height="60px"
-          elevation="0"
-          link
-          router
-          to="/order"
-          exact
-        >
-          <span class="d-block align-center justify-center text-center pa-1">
-            <v-icon class="t-white t-shadow mb-2">
-              mdi-history
-            </v-icon>
-            <br />
-            <span class="t-white t-shadow text-button">
-              ประวัติ
-            </span>
-          </span>
-        </v-btn>
-        <v-btn
-          color="transparent"
-          class="flex align-center text-center text-button my-1 pa-1"
-          width="auto"
-          max-height="60px"
-          elevation="0"
-          link
-          router
-          to="/contact"
-          exact
-        >
-          <span class="d-block align-center justify-center text-center pa-1">
-            <v-icon class="t-white t-shadow mb-2">
-              mdi-account-box
-            </v-icon>
-            <br />
-            <span class="t-white t-shadow text-button">
-              ติดต่อเรา
-            </span>
-          </span>
-        </v-btn>
-        <v-spacer />
-      </v-card-actions>
-    </v-card>
   </v-app>
 </template>
 
 <style>
-@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
-
 @font-face {
   src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
   font-family: "Roboto", "sans-serif";
+  font-feature-settings: normal;
   -moz-font-feature-settings: normal;
   -webkit-font-feature-settings: normal;
+  -o-font-feature-settings: normal;
 }
 
 /* Globals */
@@ -425,6 +261,7 @@ html {
 html,
 body,
 template {
+  line-height: 1.5;
   font-family: "Roboto", monospace;
   font-size: 0.875rem;
   font-weight: 300;
@@ -432,10 +269,12 @@ template {
   word-spacing: normal;
   word-wrap: break-word;
   font-size-adjust: none;
-  line-height: 1.5;
   font-feature-settings: normal;
   -moz-font-feature-settings: normal;
   -webkit-font-feature-settings: normal;
+  -o-font-feature-settings: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 *[dark],
@@ -467,12 +306,12 @@ template {
 .absolute-left {
   position: fixed;
   left: 0;
-  top: 70px;
+  top: 76px;
 }
 
 .absolute-right {
   position: fixed;
-  top: 70px;
+  top: 76px;
   right: 0;
 }
 
@@ -547,154 +386,135 @@ v-file-input:below-level {
 }
 
 .bg4 {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687439353/public/svg/bg4_f33lc3.svg");
   background-size: cover;
-  background-repeat: repeat-x;
-  background-position: center top;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687439353/public/svg/bg4_f33lc3.svg")
+    repeat-x center top;
 }
 
 .bg6 {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1689237872/public/svg/bg6.svg");
   background-size: cover;
-  background-repeat: repeat-x;
-  background-position: left top;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1689237872/public/svg/bg6.svg")
+    repeat-x left top;
 }
 
 .bg8 {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1690097207/public/svg/bg8_vbrp61.svg");
   background-size: cover;
-  background-repeat: repeat-x;
-  background-position: center top;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1690097207/public/svg/bg8_vbrp61.svg")
+    repeat-x center top;
 }
 
 .bg9 {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1689159993/public/svg/bg9.svg");
   background-size: contain;
-  background-repeat: repeat-x;
-  background-position: left top;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1689159993/public/svg/bg9.svg")
+    repeat-x left top;
 }
 
 .bg11 {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1690051131/public/svg/bg11_vnhmuu.svg");
-  background-size: contain 66px;
-  background-repeat: repeat-x;
-  background-position: left top;
+  background-size: contain;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1690051131/public/svg/bg11_vnhmuu.svg")
+    repeat-x left top;
 }
 
 .bg12 {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1690051131/public/svg/bg12_wnd2zl.svg");
   background-size: cover;
-  background-repeat: repeat-x;
-  background-position: left top;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1690051131/public/svg/bg12_wnd2zl.svg")
+    repeat-x left top;
 }
 
 .bg13 {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1689256266/public/svg/bg13.svg");
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1689256266/public/svg/bg13.svg")
+    no-repeat center center;
 }
 
 .bg10-2 {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1689160831/public/svg/bg10-2.svg");
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1689160831/public/svg/bg10-2.svg")
+    no-repeat center center;
 }
 
 .background {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1689237872/public/svg/background.svg");
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-attachment: fixed;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1689237872/public/svg/background.svg")
+    no-repeat fixed center top;
 }
 
 .bg-animate {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1691534265/public/svg/bg-animate.svg");
   background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1691534265/public/svg/bg-animate.svg")
+    no-repeat fixed center center;
 }
 
 .bg-animate-light {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1692065766/public/svg/bg-animate-light_jximlj.svg");
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-attachment: fixed;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1692065766/public/svg/bg-animate-light_jximlj.svg")
+    no-repeat fixed center top;
 }
 
 .bg-animate3 {
   background-size: cover;
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1692064592/public/svg/bg-animate2.svg");
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-attachment: fixed;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1692064592/public/svg/bg-animate2.svg")
+    no-repeat fixed center top;
 }
 
 .bg-dialog {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1688640542/public/web/bg300-44_grzih3.jpg");
   background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: left top;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1688640542/public/web/bg300-44_grzih3.jpg")
+    no-repeat left top;
 }
 
 .bg-dialog1 {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1690787838/public/web/LINE_P20190113_154935282_5_nc3gyj.jpg");
   background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center top;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1690787838/public/web/LINE_P20190113_154935282_5_nc3gyj.jpg")
+    no-repeat center top;
 }
 
 .btn-left2 {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687439354/public/svg/btn-left2.svg");
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center left;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687439354/public/svg/btn-left2.svg")
+    no-repeat center left;
 }
 
 .btn-right2 {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687439203/public/svg/btn-right2.svg");
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: right center;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687439203/public/svg/btn-right2.svg")
+    no-repeat right center;
+}
+
+.btn3 {
+  background-size: cover;
+  background: linear-gradient(0deg, #8e0369ff, #5b1038ff) no-repeat center
+    center;
 }
 
 .blue-pp {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687785741/public/svg/blue-pp_etvuhf.svg");
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center top;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687785741/public/svg/blue-pp_etvuhf.svg")
+    no-repeat center top;
 }
 
 .blue-wm {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687785741/public/svg/blue-wm_mo344u.svg");
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center top;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687785741/public/svg/blue-wm_mo344u.svg")
+    no-repeat center top;
 }
 
 .red-pm {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687785741/public/svg/red-pm_tgtw2v.svg");
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center top;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687785741/public/svg/red-pm_tgtw2v.svg")
+    no-repeat center top;
 }
 
 .green-nt {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687785741/public/svg/green-nt_zbmo4x.svg");
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center top;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687785741/public/svg/green-nt_zbmo4x.svg")
+    no-repeat center top;
 }
 
 .purple-sk {
-  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687785741/public/svg/purple-sk_qvoroy.svg");
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center top;
+  background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687785741/public/svg/purple-sk_qvoroy.svg")
+    no-repeat center top;
 }
 
 .btn-line {
@@ -742,59 +562,58 @@ v-file-input:below-level {
 }
 
 .grad1 {
-  background: linear-gradient(180deg, #ffffff, #e1a5d1);
   background-size: 100% 100%;
-  background-position: center top;
+  background: linear-gradient(180deg, #ffffff, #e1a5d1) center top;
 }
 
 .grad2 {
-  background: linear-gradient(180, #e002a5, #982278);
   background-size: 100% 100%;
-  background-position: center top;
+  background: linear-gradient(180deg, #e002a5, #982278) center top;
 }
 
 .grad3 {
-  background: linear-gradient(270deg, #e1a5d11a, #e002a5);
   background-size: 100% 100%;
-  background-position: left center;
+  background: linear-gradient(270deg, #e1a5d11a, #e002a5) left center;
 }
 
 .grad4 {
-  background: linear-gradient(90deg, #e1a5d11a, #e002a5);
   background-size: 100% 100%;
-  background-position: right center;
+  background: linear-gradient(90deg, #e1a5d11a, #e002a5) right center;
 }
 
 .grad5 {
-  background: radial-gradient(at top, #e1a5d1, #88286e);
   background-size: 100% 100%;
-  background-position: center top;
+  background: radial-gradient(at top, #e1a5d1, #88286e) center top;
 }
 
 .grad6 {
-  background: radial-gradient(#e002a5, #e1a5d1);
   background-size: 100% 100%;
-  background-position: center center;
+  background: radial-gradient(#e002a5, #e1a5d1) center center;
 }
 
 .grad7 {
-  background: linear-gradient(0deg, #521943c0, #932c77c2);
   background-size: 100% 100%;
-  background-position: center top;
+  background: linear-gradient(0deg, #521943c0, #932c77c2) center top;
 }
 
 .grad8 {
-  background: linear-gradient(0deg, #f700b6, #88286e);
   background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center top;
+  background: linear-gradient(0deg, #f700b6, #88286e) no-repeat center top;
 }
 
 .grad9 {
-  background: linear-gradient(180deg, #f700b6, #88286e);
   background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center top;
+  background: linear-gradient(180deg, #f700b6, #88286e) no-repeat center top;
+}
+
+.grad10 {
+  background-size: 100% 100%;
+  background: linear-gradient(180deg, #db2bad, #2c0b25) repeat-x center bottom;
+}
+
+.grad11 {
+  background-size: 100% 100%;
+  background: linear-gradient(0deg, #db2bad, #2c0b25) no-repeat center top;
 }
 
 .logo-compact2 {
@@ -805,27 +624,24 @@ v-file-input:below-level {
 }
 
 .btn1 {
-  background: radial-gradient(at center, #ffffff, ghostwhite);
   background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
+  background: radial-gradient(at center, #ffffff, ghostwhite) no-repeat center
+    center;
 }
 
 .btn2 {
-  background: radial-gradient(at center, #521943, #932c77);
   background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
+  background: radial-gradient(at center, #521943, #932c77) no-repeat center
+    center;
 }
 
 .btn2-2 {
-  background: radial-gradient(at center, #521943c0, #932c77c2);
   background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
+  background: radial-gradient(at center, #521943c0, #932c77c2) no-repeat center
+    center;
 }
 
-/* Text and Borde */
+/* Text and Borders */
 .t-transparent {
   color: transparent !important;
 }
@@ -1148,32 +964,34 @@ import { auth } from "~/plugins/firebase-init";
 export default {
   name: "BasicLayout",
 
-  head: {
-    title: "Nuxt Vuetify Starter",
-    meta: [
-      {
-        name: "viewport",
-        content:
-          "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
-      }
-    ],
-    link: [
-      {
-        rel: "stylesheet",
-        href:
-          "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
-      },
-      {
-        ref: "stylesheet",
-        href:
-          "https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css"
-      },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/icon?family=Material+Icons"
-      },
-      { ref: "stylesheet", href: "https://materialdesignicons.com/icon" }
-    ]
+  head() {
+    return {
+      meta: [
+        { charset: "utf-8" },
+        {
+          name: "viewport",
+          content:
+            "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+        }
+      ],
+      link: [
+        {
+          rel: "stylesheet",
+          href:
+            "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+        },
+        {
+          ref: "stylesheet",
+          href:
+            "https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css"
+        },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/icon?family=Material+Icons"
+        },
+        { ref: "stylesheet", href: "https://materialdesignicons.com/icon" }
+      ]
+    };
   },
 
   data() {
@@ -1185,12 +1003,36 @@ export default {
         { title: "หน้าหลัก", to: "/" },
         { title: "เกี่ยวกับเรา", to: "/about" },
         { title: "นโยบายความเป็นส่วนตัว", to: "/policies/privacy" },
-        { title: "ข้อกำหนดในการให้บริการ", to: "/policies/terms-of-services" },
-        { title: "ข้อกำหนดในการใช้งาน", to: "/policies/terms-of-used" },
-        { title: "ข้อกำหนดและเงื่อนไข", to: "/policies/terms-and-conditions" },
-        { title: "แหล่งที่มา", to: "/policies/attributions" },
-        { title: "ข้อมูลอ้างอิง", to: "/policies/references" }
+        { title: "ข้อกำหนดในการให้บริการ", to: "/policies/tos" },
+        { title: "ข้อกำหนดในการใช้งาน", to: "/policies/tou" },
+        { title: "ข้อกำหนดและเงื่อนไข", to: "/policies/tac" },
+        { title: "แหล่งที่มา", to: "/policies/attrs" },
+        { title: "ข้อมูลอ้างอิง", to: "/policies/refers" }
       ],
+      mItems: [
+        {
+          title: "หน้าหลัก",
+          icon: "mdi-home",
+          class:
+            "d-flex flex ml-auto mr-0 my-1 py-1 align-center text-center transparent medium",
+          route: "/"
+        },
+        {
+          title: "อัตราแลกเปลี่ยน",
+          icon: "mdi-currency-usd",
+          class:
+            "d-flex flex mx-0 my-1 py-1 align-center text-center transparent medium",
+          route: "/currencies"
+        },
+        {
+          title: "วิธีซื้อขาย",
+          icon: "mdi-help-box",
+          class:
+            "d-flex flex ml-0 mr-auto my-1 py-1 align-center text-center transparent medium",
+          route: "/guides"
+        }
+      ],
+      bMenus: [],
       fab: false,
       direction: "bottom",
       transition: "slide-y-reverse-transition",
@@ -1233,13 +1075,10 @@ export default {
 
   computed: {
     IS_AUTHENTICATED() {
-      return this.$store.getters.IS_AUTHENTICAATED;
+      return this.$store.getters.IS_AUTHENTICATED;
     },
     uid() {
       return this.$store.state.uid;
-    },
-    isNewCount() {
-      return this.newCount > 0;
     },
     colors() {
       let color = "black";
@@ -1257,12 +1096,12 @@ export default {
   },
 
   methods: {
-    async logout() {
-      await auth.signOut();
-      await this.$store.dispatch("sessionLogout");
-      await this.$store.dispatch("SET_SESSION_COOKIE", { idToken: null });
-      this.$store.commit("SET_UID", null);
-      this.$router.push("/");
+    logout() {
+      auth.signOut().then(() => {
+        this.$store.dispatch("SET_SESSION_COOKIE", { idToken: null });
+        this.$store.commit("SET_UID", null);
+        this.$router.replace("/login");
+      });
     }
   }
 };

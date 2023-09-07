@@ -70,12 +70,12 @@ template {
 .absolute-left {
   position: fixed;
   left: 0;
-  top: 70px;
+  top: 76px;
 }
 
 .absolute-right {
   position: fixed;
-  top: 70px;
+  top: 76px;
   right: 0;
 }
 
@@ -264,6 +264,13 @@ v-file-input:below-level {
   background-position: right center;
 }
 
+.btn3 {
+  background: linear-gradient(180deg, #8e0369ff, #5b1038ff);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
 .blue-pp {
   background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687785741/public/svg/blue-pp_etvuhf.svg");
   background-size: cover;
@@ -397,6 +404,20 @@ v-file-input:below-level {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center top;
+}
+
+.grad10 {
+  background: linear-gradient(180deg, #db2bad, #2c0b25);
+  background-size: 100% 100%;
+  background-repeat: repeat-x;
+  background-position: center bottom;
+}
+
+.grad11 {
+  background: linear-gradient(0deg, #db2bad, #2c0b25);
+  background-size: 100% 100%;
+  background-position: center top;
+  background-repeat: no-repeat;
 }
 
 .logo-compact2 {

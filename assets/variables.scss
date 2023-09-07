@@ -1,6 +1,7 @@
 @font-face {
   src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
   font-family: "Roboto", sans-serif;
+  font-feature-settings: normal;
   -moz-font-feature-settings: normal;
   -webkit-font-feature-settings: normal;
 }
@@ -79,12 +80,12 @@ template {
 .absolute-left {
   position: fixed;
   left: 0;
-  top: 70px;
+  top: 76px;
 }
 
 .absolute-right {
   position: fixed;
-  top: 70px;
+  top: 76px;
   right: 0;
 }
 

@@ -4,7 +4,6 @@
       v-model="drawer"
       app
       dark
-      fixed
       class="bg9"
       max-width="300px"
     >
@@ -104,7 +103,7 @@
               v-model="fab"
               color="transparent"
               elevation="0"
-              class="flex align-center text-center grad4 rounded-l rounded-r-0"
+              class="flex align-center text-center grad4 rounded-l rounded-r-0 t-white t-shadow text-button"
               max-width="58px"
               height="44px"
               dark
@@ -113,9 +112,9 @@
               <v-icon v-if="fab">
                 mdi-close
               </v-icon>
-              <v-icon v-else>
-                mdi-plus-circle
-              </v-icon>
+              <span v-else class="t-white t-shadow text-button">
+                แชท
+              </span>
             </v-btn>
           </template>
           <v-btn
@@ -134,255 +133,109 @@
         </v-speed-dial>
       </v-container>
     </v-main>
-
+    <!-- Bottom menu -->
     <v-card
-      class="top bg11 align-center pa-1"
+      class="bottom grad10 pa-1"
       width="100%"
       height="auto"
+      elevation="18"
       app
       dark
       tile
     >
       <v-card-actions
-        class="transparent d-flex justify-center text-center align-center px-1 py-2 mx-1"
-        align="center"
+        class="d-flex align-center justify-center text-center px-1 py-0 transparent"
       >
-        <v-app-bar-nav-icon
-          class="ml-0 mt-0 mr-auto mb-auto"
-          x-small
-          @click.stop="drawer = !drawer"
-        />
         <v-spacer />
         <v-btn
-          color="transparent"
-          class="flex ml-auto my-1 px-2 py-2 align-center text-center text-button"
+          v-for="bMenu in bMenus"
+          :key="bMenu.id"
+          :class="bMenu.class"
+          elevation="15"
           width="auto"
-          max-height="60px"
-          elevation="0"
+          :height="$vuetify.breakpoint.smAndDown ? '58.5px' : '60px'"
+          :title="bMenu.title"
           dark
           link
           router
-          to="/"
-          exact
+          :to="bMenu.route"
         >
-          <span class="d-block justify-center text-center align-center ma-1">
-            <v-icon class="t-white mb-1">
-              mdi-home
+          <span
+            class="d-block ma-auto pa-2 justify-center align-center text-center t-white medium"
+          >
+            <v-icon
+              class="t-white mx-auto mb-1"
+              :small="$vuetify.breakpoint.smAndDown"
+            >
+              {{ bMenu.icon }}
             </v-icon>
             <br />
-            <span class="text-button t-white">
-              หน้าหลัก
-            </span>
-          </span>
-        </v-btn>
-        <v-btn
-          color="transparent"
-          class="flex mx-1 my-1 px-2 py-2 align-center text-center text-button"
-          width="auto"
-          max-height="60px"
-          elevation="0"
-          dark
-          link
-          nuxt
-          to="/currencies"
-        >
-          <span class="d-block justify-center text-center align-center ma-1">
-            <v-icon class="t-white mb-1">
-              mdi-currency-usd
-            </v-icon>
-            <br />
-            <span class="text-button t-white">
-              อัตราแลกเปลี่ยน
-            </span>
-          </span>
-        </v-btn>
-        <v-btn
-          color="transparent"
-          class="flex mr-auto my-1 px-2 py-2 align-center text-center text-button"
-          width="auto"
-          max-height="60px"
-          elevation="0"
-          dark
-          link
-          router
-          to="/guides"
-          exact
-        >
-          <span class="d-block justify-center text-center align-center ma-1">
-            <v-icon class="t-white mb-1">
-              mdi-help-box
-            </v-icon>
-            <br />
-            <span class="text-button t-white">
-              วิธีซื้อขาย
+            {{ bMenu.title }}
+            <span
+              v-if="bMenu.id === '5' && newCount > 0"
+              class="d-flex pa-1 red small white--text align-center text-center"
+              style="position: absolute; top: 3px; left: 51%; border-radius: 50%; width: auto; height: auto; max-height: 18px"
+            >
+              {{ newCount }}
             </span>
           </span>
         </v-btn>
         <v-spacer />
       </v-card-actions>
     </v-card>
-
+    <!-- Top menu -->
     <v-card
-      app
-      class="bottom bg8 pa-1 align-center justify-center text-center"
-      dark
+      class="top grad11 pa-1"
       width="100%"
       height="auto"
+      elevation="15"
+      app
+      dark
       tile
     >
       <v-card-actions
-        class="transparent d-flex justify-center text-center align-end py-2 px-1 mx-2"
-        align="center"
+        class="d-flex align-center justify-center text-center px-1 py-0 transparent"
       >
+        <v-app-bar-nav-icon
+          class="mt-1 ml-0 mr-xs-3 mr-sm-2 mr-md-3 mr-lg-auto mr-xl-auto mb-auto"
+          x-small
+          @click.stop="drawer = !drawer"
+        />
         <v-spacer />
         <v-btn
-          v-if="IS_AUTHENTICATED"
-          color="transparent"
-          class="flex align-center text-center text-button my-1 pa-1"
+          v-for="(mItem, i) in mItems"
+          :key="i"
+          :class="mItem.class"
           width="auto"
-          max-height="60px"
-          elevation="0"
+          :height="$vuetify.breakpoint.smAndDown ? '55px' : '60px'"
+          :title="mItem.title"
+          elevation="7"
+          dark
           link
           router
-          to="/login"
-          exact
+          :to="mItem.route"
         >
-          <span class="d-block align-center justify-center text-center pa-1">
-            <v-icon class="t-white t-shadow mb-2">
-              mdi-login
-            </v-icon>
-            <br />
-            <span class="t-white t-shadow text-button">
-              เข้าสู่ระบบ
-            </span>
-          </span>
-        </v-btn>
-        <v-btn
-          v-if="IS_AUTHENTICATED"
-          color="transparent"
-          class="flex align-center text-center text-button my-1 pa-1"
-          width="auto"
-          max-height="60px"
-          elevation="0"
-          link
-          router
-          to="/register"
-          exact
-        >
-          <span class="d-block align-center justify-center text-center pa-1">
-            <v-icon class="t-white t-shadow mb-2">
-              mdi-account-plus
-            </v-icon>
-            <br />
-            <span class="t-white t-shadow text-button">
-              สมัครสมาชิก
-            </span>
-          </span>
-        </v-btn>
-        <v-btn
-          v-if="!IS_AUTHENTICATED"
-          color="transparent"
-          class="flex align-center text-center text-button my-1 pa-1"
-          width="auto"
-          max-height="60px"
-          elevation="0"
-          link
-          router
-          to="/users"
-          exact
-        >
-          <span class="d-block align-center justify-center text-center pa-1">
-            <v-icon class="t-white t-shadow mb-2">
-              mdi-account
-            </v-icon>
-            <br />
-            <span class="t-white t-shadow text-button">
-              ศูนย์สมาชิก
-            </span>
-            <span
-              v-if="newCount > 0"
-              class="d-flex pa-2 bd-50 text-center align-center red"
-              style="position: absolute; top: 3px; left: 51%; width: auto; height: auto; max-height: 18px"
+          <span
+            class="d-block ma-auto pa-2 justify-center align-center text-center t-white medium"
+          >
+            <v-icon
+              class="t-white mx-auto mb-1"
+              :small="$vuetify.breakpoint.smAndDown"
             >
-              <small class="white--text small">
-                {{ newCount }}
-              </small>
-            </span>
-          </span>
-        </v-btn>
-        <v-btn
-          color="transparent"
-          class="flex align-center text-center text-button my-1 pa-1"
-          width="auto"
-          max-height="60px"
-          elevation="0"
-          link
-          router
-          to="/new-order"
-          exact
-        >
-          <span class="d-block align-center justify-center text-center pa-1">
-            <v-icon class="t-white t-shadow mb-2">
-              mdi-hand-coin
+              {{ mItem.icon }}
             </v-icon>
             <br />
-            <span class="t-white t-shadow text-button">
-              แจ้งโอน
-            </span>
-          </span>
-        </v-btn>
-        <v-btn
-          v-if="!IS_AUTHENTICATED"
-          color="transparent"
-          class="flex align-center text-center text-button my-1 pa-1"
-          width="auto"
-          max-height="60px"
-          elevation="0"
-          link
-          router
-          to="/orders"
-          exact
-        >
-          <span class="d-block align-center justify-center text-center pa-1">
-            <v-icon class="t-white t-shadow mb-2">
-              mdi-history
-            </v-icon>
-            <br />
-            <span class="t-white t-shadow text-button">
-              ประวัติ
-            </span>
-          </span>
-        </v-btn>
-        <v-btn
-          color="transparent"
-          class="flex align-center text-center text-button my-1 pa-1"
-          width="auto"
-          max-height="60px"
-          elevation="0"
-          link
-          router
-          to="/contact"
-          exact
-        >
-          <span class="d-block align-center justify-center text-center pa-1">
-            <v-icon class="t-white t-shadow mb-2">
-              mdi-account-box
-            </v-icon>
-            <br />
-            <span class="t-white t-shadow text-button">
-              ติดต่อเรา
-            </span>
+            {{ mItem.title }}
           </span>
         </v-btn>
         <v-spacer />
+        <div class="mx-3"></div>
       </v-card-actions>
     </v-card>
   </v-app>
 </template>
 
 <style>
-@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
-
 @font-face {
   src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
   font-family: "Roboto", "sans-serif";
@@ -442,12 +295,12 @@ template {
 .absolute-left {
   position: fixed;
   left: 0;
-  top: 70px;
+  top: 76px;
 }
 
 .absolute-right {
   position: fixed;
-  top: 70px;
+  top: 76px;
   right: 0;
 }
 
@@ -571,6 +424,13 @@ v-file-input:below-level {
 
 .bg10-2 {
   background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1689160831/public/svg/bg10-2.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.btn3 {
+  background: linear-gradient(180deg, #8e0369ff, #5b1038ff);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -722,7 +582,7 @@ v-file-input:below-level {
 }
 
 .grad2 {
-  background: linear-gradient(180, #e002a5, #982278);
+  background: linear-gradient(180deg, #e002a5, #982278);
   background-size: 100% 100%;
   background-position: center top;
 }
@@ -769,6 +629,20 @@ v-file-input:below-level {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center top;
+}
+
+.grad10 {
+  background: linear-gradient(180deg, #db2bad, #2c0b25);
+  background-size: 100% 100%;
+  background-repeat: repeat-x;
+  background-position: center bottom;
+}
+
+.grad11 {
+  background: linear-gradient(0deg, #db2bad, #2c0b25);
+  background-size: 100% 100%;
+  background-position: center top;
+  background-repeat: no-repeat;
 }
 
 .logo-compact2 {
@@ -1157,12 +1031,36 @@ export default {
         { title: "หน้าหลัก", to: "/" },
         { title: "เกี่ยวกับเรา", to: "/about" },
         { title: "นโยบายความเป็นส่วนตัว", to: "/policies/privacy" },
-        { title: "ข้อกำหนดในการให้บริการ", to: "/policies/terms-of-services" },
-        { title: "ข้อกำหนดในการใช้งาน", to: "/policies/terms-of-used" },
-        { title: "ข้อกำหนดและเงื่อนไข", to: "/policies/terms-and-conditions" },
-        { title: "แหล่งที่มา", to: "/policies/attributions" },
-        { title: "ข้อมูลอ้างอิง", to: "/policies/references" }
+        { title: "ข้อกำหนดในการให้บริการ", to: "/policies/tos" },
+        { title: "ข้อกำหนดในการใช้งาน", to: "/policies/tou" },
+        { title: "ข้อกำหนดและเงื่อนไข", to: "/policies/tac" },
+        { title: "แหล่งที่มา", to: "/policies/attrs" },
+        { title: "ข้อมูลอ้างอิง", to: "/policies/refers" }
       ],
+      mItems: [
+        {
+          title: "หน้าหลัก",
+          icon: "mdi-home",
+          class:
+            "d-flex flex ml-auto mr-0 my-1 py-1 align-center text-center grad2 medium",
+          route: "/"
+        },
+        {
+          title: "อัตราแลกเปลี่ยน",
+          icon: "mdi-currency-usd",
+          class:
+            "d-flex flex mx-0 my-1 py-1 align-center text-center grad2 medium",
+          route: "/currencies"
+        },
+        {
+          title: "วิธีซื้อขาย",
+          icon: "mdi-help-box",
+          class:
+            "d-flex flex ml-0 mr-auto my-1 py-1 align-center text-center grad2 medium",
+          route: "/guides"
+        }
+      ],
+      bMenus: [],
       fab: false,
       direction: "bottom",
       transition: "slide-y-reverse-transition",
@@ -1204,10 +1102,84 @@ export default {
 
   computed: {
     IS_AUTHENTICATED() {
-      return this.$store.getters.IS_AUTHENTICAATED;
+      return this.$store.getters.IS_AUTHENTICATED;
     },
     uid() {
       return this.$store.state.uid;
+    }
+  },
+
+  created() {
+    if (this.IS_AUTHENTICATED) {
+      this.bMenus = [
+        {
+          id: "1",
+          title: "เข้าสู่ระบบ",
+          icon: "mdi-login",
+          class:
+            "d-flex flex ml-auto mr-0 my-1 py-1 align-center text-center grad2 medium",
+          route: "/login"
+        },
+        {
+          id: "2",
+          title: "สมัครสมาชิก",
+          icon: "mdi-account-plus",
+          class:
+            "d-flex flex mx-0 my-1 py-1 align-center text-center grad2 medium",
+          route: "/register"
+        },
+        {
+          id: "3",
+          title: "แจ้งโอน",
+          icon: "mdi-hand-coin",
+          class:
+            "d-flex flex mx-0 my-1 py-1 align-center text-center grad2 medium",
+          route: "/new-order"
+        },
+        {
+          id: "4",
+          title: "ติดต่อเรา",
+          icon: "mdi-account-box",
+          class:
+            "d-flex flex ml-0 mr-auto my-1 py-1 align-center text-center grad2 medium",
+          route: "/contact"
+        }
+      ];
+    } else if (!this.IS_AUTHENTICATED) {
+      this.bMenus = [
+        {
+          id: "5",
+          title: "ศูนย์สมาชิก",
+          icon: "mdi-account",
+          class:
+            "d-flex flex ml-auto mr-0 my-1 py-1 align-center text-center grad2 medium",
+          route: "/users"
+        },
+        {
+          id: "6",
+          title: "แจ้งโอน",
+          icon: "mdi-hand-coin",
+          class:
+            "d-flex flex mx-0 my-1 py-1 align-center text-center dark3 medium",
+          route: "/new-order"
+        },
+        {
+          id: "7",
+          title: "ประวัติ",
+          icon: "mdi-history",
+          class:
+            "d-flex flex mx-0 my-1 py-1 align-center text-center grad2 medium",
+          route: "/orders"
+        },
+        {
+          id: "8",
+          title: "ติดต่อเรา",
+          icon: "mdi-account-box",
+          class:
+            "d-flex flex ml-0 mr-auto my-1 py-1 align-center text-center dark3 medium",
+          route: "/contact"
+        }
+      ];
     }
   },
 
@@ -1220,7 +1192,7 @@ export default {
       await this.$store.dispatch("sessionLogout");
       await this.$store.dispatch("SET_SESSION_COOKIE", { idToken: null });
       this.$store.commit("SET_UID", null);
-      this.$router.push("/");
+      await this.$router.replace("/");
     }
   }
 };

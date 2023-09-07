@@ -114,6 +114,13 @@
   background-position: right center;
 }
 
+.btn3 {
+  background: linear-gradient(0deg, #8e0369ff, #5b1038ff);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
 .blue-pp {
   background: url("https://res.cloudinary.com/dckrvb0rw/image/upload/v1687785741/public/svg/blue-pp_etvuhf.svg");
   background-size: cover;
@@ -200,7 +207,7 @@
 }
 
 .grad2 {
-  background: linear-gradient(180, #e002a5, #982278);
+  background: linear-gradient(180deg, #e002a5, #982278);
   background-size: 100% 100%;
   background-position: center top;
 }
@@ -247,6 +254,20 @@
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center top;
+}
+
+.grad10 {
+  background: linear-gradient(180deg, #db2bad, #2c0b25);
+  background-size: 100% 100%;
+  background-repeat: repeat-x;
+  background-position: center bottom;
+}
+
+.grad11 {
+  background: linear-gradient(0deg, #db2bad, #2c0b25);
+  background-size: 100% 100%;
+  background-position: center top;
+  background-repeat: no-repeat;
 }
 
 .logo-compact2 {

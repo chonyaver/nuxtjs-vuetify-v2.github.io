@@ -10,7 +10,7 @@
       class="px-1 py-2"
     >
       <v-card light elevation="0" color="transparent">
-        <v-card-text class="transparent" style="height: 46px"></v-card-text>
+        <v-card-text class="transparent" style="height: 65px"></v-card-text>
         <v-card-title class="large t-light">
           <v-spacer />
           แจ้งโอน
