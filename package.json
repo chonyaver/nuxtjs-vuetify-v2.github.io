@@ -27,7 +27,9 @@
     "jwt-decode": "^3.1.2",
     "nuxt": "^3.7.1",
     "reqlim": "0.0.0",
-    "util": "^0.12.5"
+    "util": "^0.12.5",
+    "vue": "^2.7.14",
+    "vue-template-compiler": "^2.7.14"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.12.3",
