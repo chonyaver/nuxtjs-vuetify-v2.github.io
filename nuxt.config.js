@@ -139,6 +139,8 @@ module.exports = {
     optionsPath: "./vuetify.options.js"
   },
 
+  dev: process.env.NODE_ENV !== "production",
+
   // serverMiddleware: [
   // {
   // path: "/api",
